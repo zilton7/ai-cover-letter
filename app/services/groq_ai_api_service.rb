@@ -1,4 +1,3 @@
-# app/services/ai_api_service.rb
 class GroqAiApiService
   require 'net/http'
   require 'json'

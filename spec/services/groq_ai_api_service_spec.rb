@@ -1,4 +1,3 @@
-# spec/services/ai_api_service_spec.rb
 require 'rails_helper'
 require 'webmock/rspec'
 
