@@ -4,6 +4,6 @@ FactoryBot.define do
     company { 'MyJobCompany' }
     location { 'Remote' }
     description { 'MyJobCompany' }
-    cv { 'MyJobCompany' }
+    resume { 'MyJobCompany' }
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe 'JobsControllers', type: :request do
       company: 'MyJobCompany',
       location: 'Remote',
       description: 'MyJobCompany',
-      cv: 'MyJobCompany'
+      resume: 'MyJobCompany'
     }
   end
 
@@ -17,7 +17,7 @@ RSpec.describe 'JobsControllers', type: :request do
       company: '',
       location: '',
       description: '',
-      cv: ''
+      resume: ''
     }
   end
 
