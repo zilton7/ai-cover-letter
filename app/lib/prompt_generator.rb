@@ -15,6 +15,8 @@ class PromptGenerator
 
     Here is the job description for the job I'm applying for:<job description> %<job_description>s</job description>
     and here is the name of the company: <company>%<company>s</company>
+
+     dont include any text besides coverletter itself
     )
 
     format(template, replacements).strip
