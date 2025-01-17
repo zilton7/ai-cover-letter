@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (2.0.1)
     actioncable (8.0.1)
       actionpack (= 8.0.1)
       activesupport (= 8.0.1)
@@ -74,6 +75,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    afm (0.2.2)
     ast (2.4.2)
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
@@ -115,6 +117,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.0)
+    hashery (2.1.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.1.0)
@@ -191,6 +194,12 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
+    pdf-reader (2.13.0)
+      Ascii85 (>= 1.0, < 3.0, != 2.0.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pg (1.5.9)
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
@@ -304,6 +313,7 @@ GEM
       rubocop-performance
       rubocop-rails
     ruby-progressbar (1.13.0)
+    ruby-rc4 (0.1.5)
     securerandom (0.4.1)
     sidekiq (7.2.4)
       concurrent-ruby (< 2)
@@ -353,6 +363,8 @@ GEM
     thruster (0.1.10-x86_64-darwin)
     thruster (0.1.10-x86_64-linux)
     timeout (0.4.3)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -403,6 +415,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  pdf-reader (~> 2.13)
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)

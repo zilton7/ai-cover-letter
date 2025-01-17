@@ -19,6 +19,7 @@ class JobsController < ApplicationController
 
   # POST /jobs or /jobs.json
   def create
+    create_resume_file(file: job_params[:resume])
     @job = Job.new(job_params)
 
     if @job.save
@@ -35,6 +36,20 @@ class JobsController < ApplicationController
 
       # Respond with AI response to be shown in modal
       render partial: 'response_modal', locals: { loading: true }
+    else
+      render :new
+    end
+  end
+
+  def create_resume_file(resume_params)
+    @document = Resume.new(resume_params)
+    if @document.save
+      @document.extract_content
+      if @document.save
+        # redirect_to @document, notice: 'Document was successfully uploaded and content extracted.'
+      else
+        render :new, alert: 'Failed to extract content.'
+      end
     else
       render :new
     end

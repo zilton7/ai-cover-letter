@@ -68,3 +68,5 @@ end
 gem "redis", "~> 5.3"
 
 gem "simple_form", "~> 5.3"
+
+gem "pdf-reader", "~> 2.13"
