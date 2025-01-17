@@ -21,8 +21,10 @@
   <body>
     <%= turbo_stream_from 'ai_response' %>
     <%= turbo_frame_tag "turbo-modal" %>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="layout-container flex h-full grow flex-col">
+      <%= render 'shared/navbar' %>
       <%= yield %>
+      <%= render 'shared/footer' %>
     </main>
   </body>
 </html>

@@ -1,35 +1,65 @@
-<%= form_with(model: job, class: "contents", data: { turbo_frame: 'turbo-modal' }) do |form| %>
-  <% if job.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
-      <ul class="list-disc ml-6">
-        <% job.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col max-w-[35vw] flex-1 border rounded-xl justify-center">
+    <div class="flex flex-wrap justify-center gap-3 p-4">
+      <p class="text-[#1C160C] tracking-light text-[18px] font-bold leading-tight min-w-72"><%=CoverLetter.count %> Cover Letters Generated! 🎉</p>
     </div>
-  <% end %>
-  <div class="my-5">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job.errors[:title].none?, "border-red-400 focus:outline-red-600": job.errors[:title].any?}] %>
+    <div class="flex flex-wrap justify-center gap-4 px-4 py-3">
+      <%= simple_form_for(@job, html:{ class: "w-full" }, data: { turbo_frame: 'turbo-modal' }) do |f| %>
+        <% if job.errors.any? %>
+          <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+            <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+            <ul class="list-disc ml-6">
+              <% job.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="my-5">
+          <%= f.input :title, label: false, input_html: { class: "form-input w-full flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
+                                                                  text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
+                                                                  focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                  leading-normal",
+                                                          placeholder: 'Job Title' }  %>
+        </div>
+        <div class="my-5">
+          <%= f.input :company, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
+                                                                  text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
+                                                                  focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                  leading-normal",
+                                                             placeholder: 'Company Name' } %>
+        </div>
+        <div class="my-5">
+          <%= f.input :location, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
+                                                                  text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
+                                                                  focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                  leading-normal",
+                                                             placeholder: 'Location' } %>
+        </div>
+        <div class="my-5">
+          <%= f.input :description, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
+                                                                  text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
+                                                                  focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                  leading-normal",
+                                                                placeholder: 'Job Description', rows: 4} %>
+        </div>
+        <div class="flex px-4 py-3">
+          <%= f.input :cv, as: :file, label: false, input_html: { class: 'hidden', id: 'upload-cv-input' } %>
+          <label for="upload-cv-input" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#F4EFE6] text-[#1C160C] gap-2 pl-4 text-sm font-bold leading-normal tracking-[0.015em]">
+            <div class="text-[#1C160C]" data-icon="Upload" data-size="20px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H80a8,8,0,0,1,0,16H32v64H224V136H176a8,8,0,0,1,0-16h48A16,16,0,0,1,240,136ZM85.66,77.66,120,43.31V128a8,8,0,0,0,16,0V43.31l34.34,34.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,77.66ZM200,168a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z"></path>
+              </svg>
+            </div>
+            <span class="truncate">Upload CV</span>
+          </label>
+        </div>
+        <div class="flex px-4 py-3">
+          <%= f.submit class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal tracking-[0.015em]" do %>
+            <span class="truncate">Generate Cover Letter</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="my-5">
-    <%= form.label :company %>
-    <%= form.text_field :company, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job.errors[:company].none?, "border-red-400 focus:outline-red-600": job.errors[:company].any?}] %>
-  </div>
-  <div class="my-5">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job.errors[:location].none?, "border-red-400 focus:outline-red-600": job.errors[:location].any?}] %>
-  </div>
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.textarea :description, rows: 4, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job.errors[:description].none?, "border-red-400 focus:outline-red-600": job.errors[:description].any?}] %>
-  </div>
-  <div class="my-5">
-    <%= form.label :resume %>
-    <%= form.textarea :resume, rows: 4, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": job.errors[:resume].none?, "border-red-400 focus:outline-red-600": job.errors[:resume].any?}] %>
-  </div>
-  <div class="inline">
-    <%= form.submit class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
+</div>
