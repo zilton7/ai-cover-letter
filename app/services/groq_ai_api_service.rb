@@ -15,6 +15,7 @@ class GroqAiApiService
       { "messages": [{ "role": 'user', "content": @prompt }], "model": 'llama-3.3-70b-versatile' }.to_json,
       { 'Content-Type' => 'application/json', 'Authorization' => "Bearer #{API_KEY}" }
     )
+
     parse_response(response)
   end
 

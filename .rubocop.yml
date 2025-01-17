@@ -6,3 +6,12 @@
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+  
+UselessAssignment:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false

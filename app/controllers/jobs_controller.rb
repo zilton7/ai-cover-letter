@@ -22,27 +22,19 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
 
     if @job.save
-      # Trigger AI API call with job details
-      # replacements = {
-      #   job_title: @job.title,
-      #   resume: @job.resume,
-      #   job_description: @job.description,
-      #   company: @job.company
-      # }
+      # Trigger AI API call banground job with job's details
+      replacements = {
+        job_title: @job.title,
+        resume: @job.resume,
+        job_description: @job.description,
+        company: @job.company
+      }
 
-      # prompt = PromptGenerator.generate(replacements)
-
-      # ai_service = GroqAiApiService.new(prompt)
-      # ai_service.call
+      CoverLetter.create!(body: 'initialize', job_id: @job.id)
+      GenerateCoverLetterGroqAiJob.perform_async(@job.id, replacements.to_json)
 
       # Respond with AI response to be shown in modal
-      respond_to do |format|
-        format.html { render partial: 'ai_response', locals: { ai_response: 'Cool beans' } }
-        # format.turbo_stream do
-        #   render turbo_stream: turbo_stream.update('turbo-modal', partial: 'ai_response',
-        #                                                           locals: { ai_response: ai_response['choices'][0]['message']['content'] })
-        # end
-      end
+      render partial: 'response_modal', locals: { loading: true }
     else
       render :new
     end

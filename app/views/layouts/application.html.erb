@@ -19,6 +19,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <%= turbo_stream_from 'ai_response' %>
     <%= turbo_frame_tag "turbo-modal" %>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>

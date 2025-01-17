@@ -1,5 +1,8 @@
+require 'json'
+
 class PromptGenerator
   def self.generate(replacements)
+    replacements = JSON.parse(replacements).transform_keys(&:to_sym)
     template = %(
     You are a cover letter generator. Your task is to create professional and concise cover letters.
     To compose a compelling cover letter, you must scrutinize the job description for key qualifications.

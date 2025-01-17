@@ -1,0 +1,7 @@
+<%= render TurboModalComponent.new(title: 'Cover Letter') do %>
+  <%= turbo_frame_tag "ai_response_for_user" do %>
+    <div class="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-gray-50 bg-opacity-25 transition-opacity">
+      <%= image_tag "loading.svg", class: "animate-pulse", size: '100' %>
+    </div>
+  <% end %>
+<% end %>
