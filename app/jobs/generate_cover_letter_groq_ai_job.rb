@@ -18,7 +18,7 @@ class GenerateCoverLetterGroqAiJob
     # cl.update(body:, job_id:)
 
     cl = CoverLetter.find 157
-
+    sleep 2
     # Broadcast the content to the turbo frame
     Turbo::StreamsChannel.broadcast_replace_to(
       'ai_response',
