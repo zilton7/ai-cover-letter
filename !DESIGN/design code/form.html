@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
+
+    <title>Galileo Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#FFFFFF] group/design-root overflow-x-hidden"
+        style='--checkbox-tick-svg: url(&apos;data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(255,255,255)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e&apos;); font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#F4EFE6] px-10 py-3">
+                <div class="flex items-center gap-4 text-[#1C160C]">
+                    <div class="size-4">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
+                                fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]">CoverLetterGPT</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <div class="flex items-center gap-9">
+                        <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Jobs Dashboard</a>
+                        <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Account</a>
+                    </div>
+                    <button
+                        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#F4EFE6] text-[#1C160C] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                        <div class="text-[#1C160C]" data-icon="List" data-size="20px" data-weight="regular">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                                viewBox="0 0 256 256">
+                                <path
+                                    d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z">
+                                </path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </header>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <p class="text-[#1C160C] tracking-light text-[32px] font-bold leading-tight min-w-72">22,356
+                            Cover Letters Generated! 🎉</p>
+                    </div>
+                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Job Info</p>
+                            <textarea placeholder="job title"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] focus:border-[#E9DFCE] min-h-36 placeholder:text-[#A18249] p-[15px] text-base font-normal leading-normal"></textarea>
+                        </label>
+                    </div>
+                    <div class="flex px-4 py-3">
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#F4EFE6] text-[#1C160C] gap-2 pl-4 text-sm font-bold leading-normal tracking-[0.015em]">
+                            <div class="text-[#1C160C]" data-icon="Upload" data-size="20px" data-weight="regular">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                        d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H80a8,8,0,0,1,0,16H32v64H224V136H176a8,8,0,0,1,0-16h48A16,16,0,0,1,240,136ZM85.66,77.66,120,43.31V128a8,8,0,0,0,16,0V43.31l34.34,34.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,77.66ZM200,168a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="truncate">Upload CV</span>
+                        </button>
+                    </div>
+                    <div class="@container">
+                        <div
+                            class="relative flex w-full flex-col items-start justify-between gap-3 p-4 @[480px]:flex-row @[480px]:items-center">
+                            <div class="flex w-full shrink-[3] items-center justify-between">
+                                <p class="text-[#1C160C] text-base font-medium leading-normal">cover letter creativity
+                                    level</p>
+                                <p class="text-[#1C160C] text-sm font-normal leading-normal @[480px]:hidden">50%</p>
+                            </div>
+                            <div class="flex h-4 w-full items-center gap-4">
+                                <div class="flex h-1 flex-1 rounded-sm bg-[#E9DFCE]">
+                                    <div class="h-full w-[32%] rounded-sm bg-[#019863]"></div>
+                                    <div class="relative">
+                                        <div class="absolute -left-2 -top-1.5 size-4 rounded-full bg-[#019863]"></div>
+                                    </div>
+                                </div>
+                                <p class="text-[#1C160C] text-sm font-normal leading-normal hidden @[480px]:block">50%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4">
+                        <label class="flex gap-x-3 py-3 flex-row">
+                            <input type="checkbox"
+                                class="h-5 w-5 rounded border-[#E9DFCE] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#E9DFCE] focus:outline-none" />
+                            <p class="text-[#1C160C] text-base font-normal leading-normal">Include a witty remark at the
+                                end of the letter</p>
+                        </label>
+                    </div>
+                    <div class="flex px-4 py-3">
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal tracking-[0.015em]">
+                            <span class="truncate">Generate Cover Letter</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="layout-content-container flex flex-col">
+                    <p class="text-[#A18249] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Built with
+                        Wasp &amp; 100% Open-Source</p>
+                    <p class="text-[#A18249] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
+                        Follow me on Twitter</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
