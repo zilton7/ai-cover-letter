@@ -65,8 +65,6 @@ group :development do
   gem 'web-console'
 end
 
-gem "redis", "~> 5.3"
-
-gem "simple_form", "~> 5.3"
-
-gem "pdf-reader", "~> 2.13"
+gem 'pdf-reader', '~> 2.13'
+gem 'redis', '~> 5.3'
+gem 'simple_form', '~> 5.3'

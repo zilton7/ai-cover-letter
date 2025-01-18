@@ -1,6 +1,8 @@
 class Resume < ApplicationRecord
   has_one_attached :file, dependent: :purge
 
+  belongs_to :job
+
   validate :validate_file_type
 
   # Method to extract content from the PDF
@@ -11,7 +13,7 @@ class Resume < ApplicationRecord
     reader = PDF::Reader.new(StringIO.new(file.download)) # Wrap content in StringIO
     reader.pages.each { |page| content += page.text }
 
-    self.content = content
+    update(content:)
   rescue PDF::Reader::MalformedPDFError => e
     errors.add(:file, "could not be processed: #{e.message}")
   rescue StandardError => e
