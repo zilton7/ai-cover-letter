@@ -45,21 +45,26 @@
                                                                 placeholder: 'Job Description', rows: 4},
                                                   wrapper_html: { class: "my-5 mx-5" } %>
         </div>
-        <div class="flex px-4 py-3 justify-center">
-          <%= f.input :resume, as: :file, label: false, input_html: { class: 'hidden', id: 'upload-cv-input' } %>
-          <label for="upload-cv-input" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#F4EFE6] text-[#1C160C] gap-2 pl-4 text-sm font-bold leading-normal tracking-[0.015em]">
-            <div class="text-[#1C160C]" data-icon="Upload" data-size="20px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H80a8,8,0,0,1,0,16H32v64H224V136H176a8,8,0,0,1,0-16h48A16,16,0,0,1,240,136ZM85.66,77.66,120,43.31V128a8,8,0,0,0,16,0V43.31l34.34,34.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,77.66ZM200,168a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z"></path>
-              </svg>
-            </div>
-            <span class="truncate">Upload CV</span>
+        <div class="flex px-4 py-3 justify-center" data-controller='file-upload'>
+          <%= f.file_field :resume, multiple: true, 
+                                 class: 'hidden', id: "file-upload",
+                                 data: { file_upload_target: "fileInput",
+                                         action: "change->file-upload#updateLabel",
+                                        } %>
+          <label for="file-upload" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 \
+                                          px-4 flex-1 bg-[#F4EFE6] text-[#1C160C] gap-2 pl-4 text-sm font-bold leading-normal tracking-[0.015em]"
+                                         >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H80a8,8,0,0,1,0,16H32v64H224V136H176a8,8,0,0,1,0-16h48A16,
+                       16,0,0,1,240,136ZM85.66,77.66,120,43.31V128a8,8,0,0,0,16,0V43.31l34.34,34.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,
+                       48A8,8,0,0,0,85.66,77.66ZM200,168a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z"></path>
+            </svg>
+            <span data-file-upload-target="fileLabel">Upload Resume</span>
           </label>
         </div>
         <div class="flex px-4 py-3 justify-center">
-          <%= f.submit class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal tracking-[0.015em]" do %>
-            <span class="truncate">Generate Cover Letter</span>
-          <% end %>
+          <%= f.submit 'Generate Cover Letter',  class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
+                             bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal tracking-[0.015em]"%>
         </div>
       <% end %>
     </div>

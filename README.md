@@ -24,6 +24,9 @@ Things you may want to cover:
 * ...
 
 
+coverletterai.me
+
+
 # PROMPT
 You are a cover letter generator. Your task is to create professional and concise cover letters.
 
