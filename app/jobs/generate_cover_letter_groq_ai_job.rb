@@ -17,7 +17,7 @@ class GenerateCoverLetterGroqAiJob
     # cl = CoverLetter.where(job_id:).last
     # cl.update(body:, job_id:)
 
-    cl = CoverLetter.find 157
+    cl = CoverLetter.find 260
     sleep 2
     # Broadcast the content to the turbo frame
     Turbo::StreamsChannel.broadcast_replace_to(

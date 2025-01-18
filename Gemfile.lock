@@ -323,6 +323,9 @@ GEM
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simple_form-tailwind (0.1.2)
+      railties (>= 4.0)
+      simple_form (>= 5.0)
     solid_cable (3.0.5)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -426,6 +429,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   sidekiq
   simple_form (~> 5.3)
+  simple_form-tailwind
   solid_cable
   solid_cache
   solid_queue

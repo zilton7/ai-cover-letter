@@ -5,7 +5,8 @@
        data-action="turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground">
     <div class="relative p-4 w-full max-w-2xl max-h-[90vh]">
       <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow flex flex-col h-full max-h-[70vh]">
+      <div class="relative bg-white rounded-lg shadow flex flex-col h-full max-h-[70vh]"
+           data-controller="clipboard">
         <!-- Modal header -->
         <div class="flex-none flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
           <h3 class="text-xl font-semibold text-gray-900">
@@ -20,12 +21,17 @@
           </button>
         </div>
         <!-- Modal body -->
-        <div class="flex-1 overflow-y-scroll p-4 md:p-5 space-y-4 bg-[#edf2f7]">
+        <div class="flex-1 overflow-y-scroll p-4 md:p-5 space-y-4 bg-[#edf2f7]" data-clipboard-target="source" data-clipboard-text="Content to copy">
           <%= content %>
         </div>
         <!-- Modal footer -->
         <div class="flex-row flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-          <%= button_to 'Copy', '#', class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer"%>
+          <span data-clipboard-target="copiedIndicator" class="hidden text-green-700 font-semibold mr-2">
+            copied
+          </span>
+          <button data-action="clipboard#copy" title="Copy to clipboard" class="rounded-md px-3.5 py-2.5 bg-[#019863] hover:bg-[#1e5a45] \
+                                                                               text-white inline-block font-medium cursor-pointer">
+            Copy</button>
         </div>
       </div>
     </div>
