@@ -4,6 +4,10 @@ FactoryBot.define do
     company { 'MyJobCompany' }
     location { 'Remote' }
     description { 'MyJobCompany' }
-    resume { 'MyJobCompany' }
+    
+    # Create associated resume
+    after(:build) do |job|
+      job.resume ||= build(:resume, job: job)
+    end
   end
 end

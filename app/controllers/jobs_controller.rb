@@ -37,15 +37,18 @@ class JobsController < ApplicationController
       # Respond with AI response to be shown in modal
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update('turbo-modal', target: 'ai_response_for_user',
-                                                                  partial: 'response_modal')
+          render turbo_stream: turbo_stream.replace('turbo-modal', target: 'ai_response_for_user',
+                                                                   partial: 'response_modal')
         end
       end
     else
       @job.build_resume unless @job.resume
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('jobs-form', partial: 'jobs/form', locals: { job: @job }), status: :unprocessable_entity
+          render turbo_stream: turbo_stream.replace('jobs-form',
+                                                    partial: 'jobs/form',
+                                                    locals: { job: @job }),
+                 status: :unprocessable_entity
         end
 
         format.html { render :new, status: :unprocessable_entity }

@@ -1,0 +1,111 @@
+require 'rails_helper'
+
+RSpec.describe 'Jobs management', type: :system, js: true do
+  let(:valid_attributes) do
+    {
+      title: 'Regional co-manager',
+      company: 'Dunder Mifflin inc.',
+      location: 'Scranton, PA',
+      description: 'Dunder Mifflin Paper Company, Inc. is a fictional paper and office supplies wholesale compan.',
+      resume_attributes: {
+        file: fixture_file_upload(Rails.root.join('spec/fixtures/files/resume_for_test.pdf'), 'application/pdf')
+      }
+    }
+  end
+
+  let(:invalid_attributes) do
+    {
+      title: '',
+      company: '',
+      location: '',
+      description: '',
+      resume_attributes: {
+        file: nil
+      }
+    }
+  end
+
+  let(:replacements) do
+    {
+      job_title: valid_attributes[:title],
+      resume: valid_attributes[:title],
+      job_description: 'Seeking a talented engineer to develop scalable applications.',
+      company: 'Tech Corp'
+    }.to_json
+  end
+
+  let(:mocked_response) do
+    "Dear Hiring Manager,\n\nI am excited to apply for the Software Engineer position at Tech Corp. \
+      With experience in Ruby on Rails, React, and Postgres, I am confident in my ability to contribute \
+      to your team's success.\n\nSincerely,\nCandidate Name"
+  end
+
+  describe 'Job creation' do
+    context 'when the form is valid' do
+      it 'creates a new job and displays the modal' do
+        allow(PromptGenerator).to receive(:generate).with(replacements).and_return(mocked_response)
+
+        visit new_job_path
+
+        fill_in 'Job Title', with: valid_attributes[:title]
+        fill_in 'Company Name', with: valid_attributes[:company]
+        fill_in 'Location', with: valid_attributes[:location]
+        fill_in 'Job Description', with: valid_attributes[:description]
+        # Attach the file to the hidden file input and trigger the change event
+        file_path = valid_attributes[:resume_attributes][:file].path
+        attach_file('resume-file-upload', file_path, visible: false)
+        page.execute_script("document.getElementById('resume-file-upload').dispatchEvent(new Event('change'));")
+        # Verify the label update
+        expect(page).to have_content("'#{file_path.gsub!('/tmp/', '')}' selected")
+
+        click_button 'Generate Cover Letter'
+        expect(page).to have_selector('#turbo-modal')
+
+        expect(page).to have_css('img.animate-pulse[src*="loading"][width="100"][height="100"]', wait: 5)
+        expect(Job.count).to eq(1)
+        expect(Job.last.resume.content).to be_present
+      end
+    end
+
+    context 'when the form is invalid' do
+      it 'renders errors inline' do
+        visit new_job_path
+
+        fill_in 'Job Title', with: invalid_attributes[:title]
+        fill_in 'Company Name', with: invalid_attributes[:company]
+        fill_in 'Location', with: invalid_attributes[:location]
+        fill_in 'Job Description', with: invalid_attributes[:description]
+
+        click_button 'Generate Cover Letter'
+
+        expect(page).to have_content("Title can't be blank")
+        expect(page).to have_content("Company can't be blank")
+        expect(page).to have_content("Location can't be blank")
+        expect(page).to have_content("Description can't be blank")
+        expect(Job.count).to eq(0)
+      end
+    end
+  end
+
+  describe 'Job index' do
+    it 'displays a list of jobs' do
+      Job.create!(valid_attributes)
+      visit jobs_path
+
+      expect(page).to have_content(valid_attributes[:title])
+      expect(page).to have_content(valid_attributes[:company])
+    end
+  end
+
+  describe 'Job show' do
+    it 'displays job details' do
+      job = Job.create!(valid_attributes)
+      visit job_path(job)
+
+      expect(page).to have_content(job.title)
+      expect(page).to have_content(job.company)
+      expect(page).to have_content(job.location)
+      expect(page).to have_content(job.description)
+    end
+  end
+end
