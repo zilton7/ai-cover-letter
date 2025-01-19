@@ -4,6 +4,7 @@ class Job < ApplicationRecord
 
   accepts_nested_attributes_for :resume
   validates_presence_of :resume
+  validates_associated :resume
 
   validates_presence_of :title, :company, :location, :description
 end

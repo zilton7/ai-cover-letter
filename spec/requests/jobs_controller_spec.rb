@@ -27,6 +27,12 @@ RSpec.describe JobsController, type: :controller do
       }
     end
 
+    let(:invalid_resume_attributes) do
+      file = fixture_file_upload(Rails.root.join('spec/fixtures/files/image.png'), 'image/png')
+      valid_attributes[:job][:resume_attributes][:file] = file
+      valid_attributes
+    end
+
     before do
       allow(GenerateCoverLetterGroqAiJob).to receive(:perform_async)
     end
@@ -71,6 +77,21 @@ RSpec.describe JobsController, type: :controller do
 
         expect(response).to render_template(:new)
         expect(assigns(:job).errors).not_to be_empty
+      end
+    end
+
+    context 'with invalid resume format' do
+      it 'does not create a new job' do
+        expect do
+          post :create, params: invalid_resume_attributes, format: :turbo_stream
+        end.not_to change(Job, :count)
+      end
+
+      it 'renders the new template with errors' do
+        post :create, params: invalid_resume_attributes, format: :html
+
+        expect(response).to render_template(:new)
+        expect(assigns(:job).errors['resume.file']).to include('must be a PDF')
       end
     end
   end
