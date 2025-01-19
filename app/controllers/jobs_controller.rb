@@ -35,9 +35,14 @@ class JobsController < ApplicationController
       GenerateCoverLetterGroqAiJob.perform_async(@job.id, replacements.to_json)
 
       # Respond with AI response to be shown in modal
-      render partial: 'response_modal', locals: { loading: true }
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update('turbo-modal', target: 'ai_response_for_user', partial: 'response_modal')
+        end
+      end
     else
-      render :new
+      @job.build_resume unless @job.resume
+      render :new, status: :unprocessable_entity
     end
   end
 
