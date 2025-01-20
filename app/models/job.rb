@@ -7,4 +7,8 @@ class Job < ApplicationRecord
   validates_associated :resume
 
   validates_presence_of :title, :company, :location, :description
+
+  def full_title
+    "#{title} @ #{company}"
+  end
 end

@@ -3,6 +3,7 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
+    @title = 'Your Jobs'
     @jobs = Job.all
   end
 
