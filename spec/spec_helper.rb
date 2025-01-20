@@ -1,5 +1,9 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+
 require 'capybara/rspec'
 require 'webmock/rspec'
+
 require 'webdrivers'
 Webdrivers::Chromedriver.required_version = '125.0.6422.60'
 
