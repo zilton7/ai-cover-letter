@@ -25,25 +25,38 @@ RSpec.describe 'Jobs management', type: :system, js: true do
     }
   end
 
-  let(:replacements) do
-    {
-      job_title: valid_attributes[:title],
-      resume: valid_attributes[:title],
-      job_description: 'Seeking a talented engineer to develop scalable applications.',
-      company: 'Tech Corp'
-    }.to_json
-  end
-
-  let(:mocked_response) do
-    "Dear Hiring Manager,\n\nI am excited to apply for the Software Engineer position at Tech Corp. \
-      With experience in Ruby on Rails, React, and Postgres, I am confident in my ability to contribute \
-      to your team's success.\n\nSincerely,\nCandidate Name"
-  end
-
   describe 'Job creation' do
+    require 'sidekiq/testing'
+    Sidekiq::Testing.inline! # Makes Sidekiq run jobs immediately
+
+    let(:replacements) do
+      {
+        job_title: valid_attributes[:title],
+        resume: 'This is the resume content from pdf file!',
+        job_description: valid_attributes[:description],
+        company: valid_attributes[:company]
+      }.to_json
+    end
+
+    let(:mocked_prompt) do
+      "Dear Hiring Manager,\n\nI am excited to apply for the Software Engineer position at Tech Corp. \
+        With experience in Ruby on Rails, React, and Postgres, I am confident in my ability to contribute \
+        to your team's success.\n\nSincerely,\nCandidate Name"
+    end
+
+    let(:mocked_groq_ai_api_response) do
+      { 'choices': [{ 'message': { 'content': 'This is the content' } }] }.with_indifferent_access
+    end
+
     context 'when the form is valid' do
       it 'creates a new job and displays the modal' do
-        allow(PromptGenerator).to receive(:generate).with(replacements).and_return(mocked_response)
+        allow(PromptGenerator).to receive(:generate)
+          .with(replacements)
+          .and_return(mocked_prompt)
+
+        # Mock the service
+        service = instance_double(GroqAiApiService, call: mocked_groq_ai_api_response)
+        allow(GroqAiApiService).to receive(:new).with(mocked_prompt).and_return(service)
 
         visit new_job_path
 
@@ -64,6 +77,7 @@ RSpec.describe 'Jobs management', type: :system, js: true do
         expect(page).to have_css('img.animate-pulse[src*="loading"][width="100"][height="100"]', wait: 5)
         expect(Job.count).to eq(1)
         expect(Job.last.resume.content).to be_present
+        expect(Job.last.resume.content).to eq('This is the resume content from pdf file!')
       end
     end
 

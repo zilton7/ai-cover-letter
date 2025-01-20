@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :resume do
     association :job
     label { 'MyString' }
-    content { 'This is resume for test' }
+    content { 'This is resume content assigned bt FactoryBot' }
 
     # Attach a PDF file to the `file` attribute
     after(:build) do |resume|
