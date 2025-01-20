@@ -8,7 +8,7 @@ RSpec.describe PromptGenerator do
         resume: 'John Doe, experienced developer with expertise in Ruby on Rails, JavaScript, and PostgreSQL.',
         job_description: 'We are looking for a skilled software engineer to join our dynamic team and work on scalable web applications.',
         company: 'Tech Innovators Inc.'
-      }
+      }.to_json
     end
 
     it 'generates a cover letter with the provided replacements' do
@@ -28,7 +28,7 @@ RSpec.describe PromptGenerator do
     end
 
     it 'raises a KeyError if a required replacement is missing' do
-      invalid_replacements = { job_title: 'Software Engineer' }
+      invalid_replacements = { job_title: 'Software Engineer' }.to_json
       expect { described_class.generate(invalid_replacements) }.to raise_error(KeyError)
     end
   end
