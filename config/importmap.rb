@@ -10,3 +10,5 @@ pin '@fortawesome/fontawesome-free', to: '@fortawesome--fontawesome-free.js' # @
 pin '@stimulus-components/reveal', to: '@stimulus-components--reveal.js' # @5.0.0
 pin 'add' # @2.0.6
 pin '@hotwired/stimulus', to: '@hotwired--stimulus.js' # @3.2.2
+pin '@stimulus-components/dropdown', to: '@stimulus-components--dropdown.js' # @3.0.0
+pin 'stimulus-use' # @0.52.3

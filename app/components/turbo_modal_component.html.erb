@@ -1,12 +1,12 @@
 <%= turbo_frame_tag "turbo-modal" do %>
   <div id="default-modal" tabindex="-1" aria-hidden="true"
-       class="overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center w-full h-[full] backdrop-blur-sm  
+       class="overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm  
               backdrop-grayscale backdrop-brightness-50"
        data-controller="turbo-modal" data-turbo-modal-target="modal" 
        data-action="turbo:submit-end->turbo-modal#submitEnd keyup@window->turbo-modal#closeWithKeyboard click@window->turbo-modal#closeBackground">
-    <div class="relative p-4 w-full max-w-2xl max-h-[90vh]">
+    <div class="relative p-4 w-full max-w-2xl min-h-[90vh] max-h-[90vh]">
       <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow flex flex-col h-full max-h-[70vh]"
+      <div class="relative bg-white rounded-lg shadow flex flex-col min-h-[70vh] max-h-[70vh]"
            data-controller="clipboard">
         <!-- Modal header -->
         <div class="flex-none flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
