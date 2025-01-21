@@ -1,23 +1,13 @@
 <%= render TurboModalComponent.new(title: 'All Cover Letters') do %>
-  <div
-    data-controller="dropdown"
-    data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
-    class="inline-block relative h-full">
-    <button data-action="dropdown#toggle:stop" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">
-      <%= @job&.cover_letters&.last&.title_with_datetime || 'Select Cover Letter' %>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="inline-block fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
-    </button>
-    <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
-      <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
-        <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 \
-                                                         bg-white hover:bg-gray-100 whitespace-nowrap \
-                                                         focus:bg-gray-100'>
-          Account
-        </a>
-      </div>
+  <div class="inline-block relative h-full w-full" data-controller="cover-letter">
+    <div class="w-full flex justify-center">
+      <%= simple_form_for @job, html: { class:' w-full' } do |f| %>
+        <%= f.input :cover_letters, label: false, collection: @job.cover_letters_for_dropdown, selected: @job&.cover_letters&.last&.id,
+                                    include_blank: false, input_html: { data: { action: 'change->cover-letter#load' } } %>
+      <% end %>
     </div>
-  </div>
-  <div class="">
-    <%= @job&.cover_letters&.last&.body.gsub("\n", "<br>").html_safe %>
+    <div data-clipboard-target="source" data-cover-letter-target="content">
+      <%= render 'cover_letters/cover_letter', cover_letter: @job&.cover_letters&.last&.body || 'No Cover Letters to show' %>
+    </div>
   </div>
 <% end %>

@@ -11,4 +11,8 @@ class Job < ApplicationRecord
   def full_title
     "#{title} @ #{company}"
   end
+
+  def cover_letters_for_dropdown
+    cover_letters.order(created_at: :desc).map { |cover_letter| [cover_letter.title_with_datetime, cover_letter.id] }
+  end
 end

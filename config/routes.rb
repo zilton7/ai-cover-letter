@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root to: 'jobs#new'
 
+  resources :cover_letters, only: [:show]
+
   # authenticate :user, ->(u) { u.admin? } do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
