@@ -73,3 +73,5 @@ gem 'pdf-reader', '~> 2.13'
 gem 'redis', '~> 5.3'
 gem 'simple_form', '~> 5.3'
 gem 'simple_form-tailwind'
+
+gem 'pagy', '~> 9.3'

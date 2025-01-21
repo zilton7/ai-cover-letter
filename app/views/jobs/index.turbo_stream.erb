@@ -1,0 +1,8 @@
+<%= turbo_stream.append "jobs" do %>
+  <div class="mt-4 mb-4">
+    <%= render @jobs %>
+  </div>
+<% end %>
+<%= turbo_stream.update "load_more_button" do %>
+  <%= render 'shared/load_more_button', pagy_object: @pagy %>
+<% end %>

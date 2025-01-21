@@ -6,7 +6,7 @@
           <p class="text-[#1C160C] text-base font-bold leading-tight"><%= job.full_title %></p>
           <p class="text-[#A18249] text-sm font-normal leading-normal"><%= job.location %></p>
         </div>
-        <div data-reveal-target="item" class="hidden flex flex-row justify-between">
+        <div data-reveal-target="item" class="hidden flex flex-row justify-between z-100">
           <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
                      rounded-full h-10 px-4 flex-row-reverse bg-[#F4EFE6] text-[#1C160C] pr-2 gap-1 text-sm \
                      font-medium leading-normal w-fit">
@@ -19,11 +19,11 @@
             </div>
             <span class="truncate">Display Cover Letters</span>
           </button>
-          <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
+          <%= link_to new_job_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
                      rounded-full h-10 px-4 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal \
-                     tracking-[0.015em]">
+                     tracking-[0.015em]" do %>
             <span class="truncate">Create Additional Cover Letter</span>
-          </button>
+          <% end %>
         </div>
       </div>
     </div>

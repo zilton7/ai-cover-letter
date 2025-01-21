@@ -1,10 +1,18 @@
 class JobsController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_job, only: %i[show edit update destroy]
 
   # GET /jobs or /jobs.json
   def index
     @title = 'Your Jobs'
-    @jobs = Job.all
+    @pagy, @jobs = pagy(Job.all) # TODO: add current_user scope
+
+    respond_to do |format|
+      format.html
+
+      format.turbo_stream
+    end
   end
 
   # GET /jobs/1 or /jobs/1.json

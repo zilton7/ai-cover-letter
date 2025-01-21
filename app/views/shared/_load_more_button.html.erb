@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "load_more_button" do %>
+  <% if pagy_object.next.present? %>
+    <div class="flex justify-center mb-3 mt-5">
+      <%= link_to "Load More", pagy_url_for(pagy_object, pagy_object.next),
+                                                  class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center \
+                                                          overflow-hidden rounded-full h-10 px-4 bg-[#019863] text-[#f8fbfa] text-sm \
+                                                          font-bold leading-normal tracking-[0.015em]",
+                                            data: { turbo_stream: true, turbo_submits_with: "Loading..." } %>
+    </div>
+  <% end %>
+<% end %>
