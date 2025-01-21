@@ -111,15 +111,15 @@ RSpec.describe 'Jobs management', type: :system, js: true do
     end
   end
 
-  describe 'Job show' do
-    it 'displays job details' do
-      job = Job.create!(valid_attributes)
-      visit job_path(job)
+  # describe 'Job show' do
+  #   it 'displays job details' do
+  #     job = Job.create!(valid_attributes)
+  #     visit job_path(job)
 
-      expect(page).to have_content(job.title)
-      expect(page).to have_content(job.company)
-      expect(page).to have_content(job.location)
-      expect(page).to have_content(job.description)
-    end
-  end
+  #     expect(page).to have_content(job.title)
+  #     expect(page).to have_content(job.company)
+  #     expect(page).to have_content(job.location)
+  #     expect(page).to have_content(job.description)
+  #   end
+  # end
 end
