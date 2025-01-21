@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
 
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  input:read-only[type=text] {
+    @apply cursor-not-allowed bg-gray-200 border-gray-400;
   }
 }
 
-*/
+

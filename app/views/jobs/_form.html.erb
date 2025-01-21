@@ -2,7 +2,12 @@
   <div class="flex flex-1 justify-center py-5">
     <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center">
       <div class="flex flex-wrap justify-center gap-3 p-4 mt-5">
-        <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight min-w-72"><%=CoverLetter.count %> Cover Letters Generated! 🎉</p>
+        <% editing_mode = controller.action_name == 'edit' ? true : false  %>
+        <% if editing_mode %>
+          <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
+        <% else %>
+          <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight min-w-72"><%=CoverLetter.count %> Cover Letters Generated! 🎉</p>
+        <% end %>
       </div>
       <div class="flex flex-wrap justify-center gap-4 px-4 py-3">
         <%= simple_form_for(@job, html:{ class: "w-full" }) do |f| %>
@@ -10,6 +15,7 @@
                                                                 text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                 focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                 leading-normal",
+                                                          readonly: editing_mode,
                                                           placeholder: 'Job Title' },
                                               wrapper_html: { class: "my-5 mx-5" } %>
           <div class="my-5">
@@ -17,6 +23,7 @@
                                                                     text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                     focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                     leading-normal",
+                                                             readonly: editing_mode,
                                                              placeholder: 'Company Name' },
                                               wrapper_html: { class: "my-5 mx-5" } %>
           </div>
@@ -25,6 +32,7 @@
                                                                      text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                      focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                      leading-normal",
+                                                             readonly: editing_mode,
                                                              placeholder: 'Location' },
                                                wrapper_html: { class: "my-5 mx-5" } %>
           </div>
