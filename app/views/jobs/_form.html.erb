@@ -1,6 +1,6 @@
 <%= turbo_frame_tag 'jobs-form' do %>
   <div class="flex flex-1 justify-center py-5">
-    <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border rounded-xl shadow justify-center">
+    <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center">
       <div class="flex flex-wrap justify-center gap-3 p-4 mt-5">
         <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight min-w-72"><%=CoverLetter.count %> Cover Letters Generated! 🎉</p>
       </div>
@@ -8,14 +8,14 @@
         <%= simple_form_for(@job, html:{ class: "w-full" }) do |f| %>
           <%= f.input :title, label: false, input_html: { class: "form-input w-full flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                 text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
-                                                                focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                 leading-normal",
                                                           placeholder: 'Job Title' },
                                               wrapper_html: { class: "my-5 mx-5" } %>
           <div class="my-5">
             <%= f.input :company, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                     text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
-                                                                    focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                    focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                     leading-normal",
                                                              placeholder: 'Company Name' },
                                               wrapper_html: { class: "my-5 mx-5" } %>
@@ -23,7 +23,7 @@
           <div class="my-5">
             <%= f.input :location, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                      text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
-                                                                     focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                     focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                      leading-normal",
                                                              placeholder: 'Location' },
                                                wrapper_html: { class: "my-5 mx-5" } %>
@@ -31,7 +31,7 @@
           <div class="my-5">
             <%= f.input :description, as: :text, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 overflow-hidden rounded-xl \
                                                                         text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
-                                                                        focus:border-[#E9DFCE] placeholder:text-[#A18249] p-[15px] text-base font-normal \
+                                                                        focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                         leading-normal",
                                                               placeholder: 'Job Description', rows: 4},
                                                 wrapper_html: { class: "my-5 mx-5" } %>
@@ -43,8 +43,9 @@
                                          action: "change->file-upload#updateLabel",
                                         } %>
               <label for="resume-file-upload" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden \
-                                                   rounded-full h-12  px-4 flex-1 bg-[#F4EFE6] \ gap-2 pl-4 text-sm font-bold leading-normal \
-                                                   tracking-[0.015em] <%=f.object.errors['resume'].present? ? 'text-red-500' : 'text-[#1C160C]' %>"
+                                                   rounded-full h-12 hover:border hover:border-[#019863] hover:scale-[1.0125] px-4 flex-1 bg-[#F4EFE6] \ 
+                                                   gap-2 pl-4 text-sm font-bold leading-normal tracking-[0.015em] \
+                                                   <%=f.object.errors['resume'].present? ? 'text-red-500' : 'text-[#1C160C]' %>"
                                          >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
                   <path d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H80a8,8,0,0,1,0,16H32v64H224V136H176a8,8,0,0,1,0-16h48A16,
@@ -70,7 +71,7 @@
             <%= f.submit 'Generate Cover Letter', class: "flex min-w-[84px] cursor-pointer items-center \
                                                         justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
                                                         bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal \
-                                                        tracking-[0.015em]",
+                                                        tracking-[0.015em] hover:scale-[1.0125]",
                                                 data: { turbo_submits_with: 'Loading...' } %>
           </div>
         <% end %>

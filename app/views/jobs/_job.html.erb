@@ -1,5 +1,5 @@
 <div class="p-4" data-controller="reveal" data-reveal-hidden-class="hidden">
-  <%= link_to 'javascript:void(0)', type: 'button', data: { action: "reveal#toggle", turbo_frame: false } do %>
+  <%= link_to 'javascript:void(0)', type: 'button', title: 'Click to Expand', data: { action: "reveal#toggle", turbo_frame: false } do %>
     <div class="flex items-stretch justify-between gap-4 rounded-xl bg-[#FFFFFF] hover:bg-[#e0e0e0] cursor-pointer p-4 shadow">
       <div class="flex flex-col gap-4 w-full">
         <div class="flex flex-col gap-1">
@@ -7,21 +7,18 @@
           <p class="text-[#A18249] text-sm font-normal leading-normal"><%= job.location %></p>
         </div>
         <div data-reveal-target="item" class="hidden flex flex-row justify-between z-100">
-          <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
-                     rounded-full h-10 px-4 flex-row-reverse bg-[#F4EFE6] text-[#1C160C] pr-2 gap-1 text-sm \
-                     font-medium leading-normal w-fit">
+          <%= link_to job_path(job), data: { turbo_frame: 'turbo-modal' },
+                                     class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
+                                             rounded-full h-10 px-4 flex-row-reverse bg-[#F4EFE6] text-[#1C160C] pr-2 gap-1 text-sm \
+                                             font-medium leading-normal w-fit" do %>
             <div class="text-[#1C160C]" data-icon="CaretRight" data-size="18px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11
-            .32l80,80A8,8,0,0,1,181.66,133.66Z">
-                </path>
-              </svg>
+              <%= image_tag "arrow-right.svg", class: "animate-pulse", size: '15' %>
             </div>
             <span class="truncate">Display Cover Letters</span>
-          </button>
+          <% end %>
           <%= link_to new_job_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
-                     rounded-full h-10 px-4 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal \
-                     tracking-[0.015em]" do %>
+                                            rounded-full h-10 px-4 bg-[#019863] text-[#FFFFFF] text-sm font-bold leading-normal \
+                                            tracking-[0.015em]" do %>
             <span class="truncate">Create Additional Cover Letter</span>
           <% end %>
         </div>
