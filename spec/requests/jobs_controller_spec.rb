@@ -95,4 +95,63 @@ RSpec.describe JobsController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #update' do
+    let!(:job) { create(:job) }
+
+    let(:valid_attributes) do
+      {
+        description: 'Updated description.',
+        resume_attributes: {
+          file: fixture_file_upload(Rails.root.join('spec/fixtures/files/resume_for_test.pdf'), 'application/pdf')
+        }
+
+      }
+    end
+
+    let(:invalid_attributes) do
+      {
+        description: ''
+      }
+    end
+
+    before do
+      allow(GenerateCoverLetterGroqAiJob).to receive(:perform_async)
+    end
+
+    context 'with valid parameters' do
+      it 'updates the job and redirects' do
+        patch :update, params: { id: job.id, job: valid_attributes }, format: :turbo_stream
+
+        expect(response).to have_http_status(:ok)
+        expect(job.reload.description).to eq('Updated description.')
+      end
+
+      it 'triggers the AI job processing' do
+        expect(GenerateCoverLetterGroqAiJob).to receive(:perform_async).with(
+          job.id, { job_title: 'MyJob', resume: 'This is the resume content from pdf file!',
+                    job_description: 'Updated description.', company: 'MyJobCompany' }.to_json
+        )
+
+        patch :update, params: { id: job.id, job: valid_attributes }, format: :turbo_stream
+      end
+    end
+
+    context 'with invalid attributes' do
+      before do
+        patch :update, params: { id: job.id, job: invalid_attributes }, format: :turbo_stream
+      end
+
+      it 'does not update the job and renders the edit form' do
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to render_template('jobs/_form')
+        expect(job.reload.title).not_to eq('')
+      end
+
+      it 'returns error for invalid input' do
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(assigns(:job).errors['description']).to include('can\'t be blank')
+      end
+    end
+  end
 end

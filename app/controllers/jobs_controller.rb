@@ -46,8 +46,9 @@ class JobsController < ApplicationController
       # Respond with AI response to be shown in modal
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('turbo-modal', target: 'ai_response_for_user',
-                                                                   partial: 'response_modal')
+          render turbo_stream: turbo_stream.replace('turbo-modal',
+                                                    target: 'ai_response_for_user',
+                                                    partial: 'response_modal')
         end
       end
     else
@@ -68,7 +69,7 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
 
-    if @job.update(job_params)
+    if @job.update(job_params.except(:title, :company, :location))
       # Trigger content extraction if the resume is updated
       @job.resume.extract_content if params[:job][:resume_attributes].present? && params[:job][:resume_attributes][:file].present?
 
@@ -76,7 +77,7 @@ class JobsController < ApplicationController
       replacements = {
         job_title: @job.title,
         resume: @job.resume.content,
-        job_description: @job.description,
+        job_description: @job.reload.description,
         company: @job.company
       }
 
@@ -85,8 +86,9 @@ class JobsController < ApplicationController
       # Respond with a success message
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('turbo-modal', target: 'ai_response_for_user',
-                                                                   partial: 'response_modal')
+          render turbo_stream: turbo_stream.replace('turbo-modal',
+                                                    target: 'ai_response_for_user',
+                                                    partial: 'response_modal')
         end
       end
     else
@@ -98,8 +100,6 @@ class JobsController < ApplicationController
                                                     locals: { job: @job }),
                  status: :unprocessable_entity
         end
-
-        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

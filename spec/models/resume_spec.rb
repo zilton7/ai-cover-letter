@@ -4,7 +4,7 @@ RSpec.describe Resume, type: :model do
   let(:job) { create(:job) }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:job) }
+    it { is_expected.to belong_to(:job).optional }
     it { should have_one_attached(:file) }
   end
 

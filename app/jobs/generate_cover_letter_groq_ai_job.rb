@@ -20,9 +20,8 @@ class GenerateCoverLetterGroqAiJob
 
     cover_letter = CoverLetter.new(body:, job_id:)
 
-    # cl = CoverLetter.find 260
+    # cover_letter = CoverLetter.last
     # sleep 2
-    # Broadcast the content to the turbo frame
 
     body = if cover_letter.save
              cover_letter.body
@@ -30,6 +29,7 @@ class GenerateCoverLetterGroqAiJob
              'Error Occured'
            end
 
+    # Broadcast the content to the turbo frame
     Turbo::StreamsChannel.broadcast_replace_to(
       'ai_response',
       target: 'ai_response_for_user',
