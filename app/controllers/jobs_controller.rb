@@ -65,15 +65,41 @@ class JobsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /jobs/1 or /jobs/1.json
   def update
-    respond_to do |format|
-      if @job.update(job_params)
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
-        format.json { render :show, status: :ok, location: @job }
-      else
+    @job = Job.find(params[:id])
+
+    if @job.update(job_params)
+      # Trigger content extraction if the resume is updated
+      @job.resume.extract_content if params[:job][:resume_attributes].present? && params[:job][:resume_attributes][:file].present?
+
+      # Trigger the AI job if relevant fields are updated
+      replacements = {
+        job_title: @job.title,
+        resume: @job.resume.content,
+        job_description: @job.description,
+        company: @job.company
+      }
+
+      GenerateCoverLetterGroqAiJob.perform_async(@job.id, replacements.to_json)
+
+      # Respond with a success message
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('turbo-modal', target: 'ai_response_for_user',
+                                                                   partial: 'response_modal')
+        end
+      end
+    else
+      @job.build_resume unless @job.resume
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('jobs-form',
+                                                    partial: 'jobs/form',
+                                                    locals: { job: @job }),
+                 status: :unprocessable_entity
+        end
+
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -1,7 +1,9 @@
 class Resume < ApplicationRecord
   has_one_attached :file, dependent: :purge
 
-  belongs_to :job
+  belongs_to :job, optional: true
+
+  validates_presence_of :file
 
   validate :validate_file_type
 

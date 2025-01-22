@@ -2,7 +2,7 @@
   <div class="flex flex-1 justify-center py-5">
     <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center">
       <div class="flex flex-wrap justify-center gap-3 p-4 mt-5">
-        <% editing_mode = controller.action_name == 'edit' ? true : false  %>
+        <% editing_mode = controller.action_name.in?(['edit', 'update']) ? true : false  %>
         <% if editing_mode %>
           <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
         <% else %>
@@ -10,7 +10,7 @@
         <% end %>
       </div>
       <div class="flex flex-wrap justify-center gap-4 px-4 py-3">
-        <%= simple_form_for(@job, html:{ class: "w-full" }) do |f| %>
+        <%= simple_form_for(@job, html:{ class: "w-full", multipart: true }) do |f| %>
           <%= f.input :title, label: false, input_html: { class: "form-input w-full flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                 text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                 focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
