@@ -5,7 +5,7 @@
 
 @layer components {
   input:read-only[type=text] {
-    @apply cursor-not-allowed bg-gray-200 border-gray-400;
+    @apply cursor-not-allowed bg-gray-200 border-gray-400 text-gray-400;
   }
 }
 

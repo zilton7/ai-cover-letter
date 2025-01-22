@@ -2,11 +2,11 @@
   <div class="flex flex-1 justify-center py-5">
     <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center">
       <div class="flex flex-wrap justify-center gap-3 p-4 mt-5">
-        <% editing_mode = controller.action_name.in?(['edit', 'update']) ? true : false  %>
+        <% editing_mode = controller.action_name == 'new' ? true : false  %>
         <% if editing_mode %>
-          <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
-        <% else %>
           <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight min-w-72"><%=CoverLetter.count %> Cover Letters Generated! 🎉</p>
+        <% else %>
+          <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
         <% end %>
       </div>
       <div class="flex flex-wrap justify-center gap-4 px-4 py-3">
@@ -76,11 +76,11 @@
             <% end %>
           <% end %>
           <div class="flex px-4 py-3 justify-center">
-            <%= f.submit 'Generate Cover Letter', class: "flex min-w-[84px] cursor-pointer items-center \
-                                                        justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
-                                                        bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal \
-                                                        tracking-[0.015em] hover:scale-[1.0125]",
-                                                data: { turbo_submits_with: 'Loading...' } %>
+            <%= f.submit "#{editing_mode ? 'Generate Cover Letter' : 'Create New Cover Letter'}", class: "flex min-w-[84px] cursor-pointer items-center \
+            justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
+            bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal \
+            tracking-[0.015em] hover:scale-[1.0125]",
+            data: { turbo_submits_with: 'Loading...' } %>
           </div>
         <% end %>
       </div>
