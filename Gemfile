@@ -75,3 +75,5 @@ gem 'simple_form', '~> 5.3'
 gem 'simple_form-tailwind'
 
 gem 'pagy', '~> 9.3'
+
+gem "devise", "~> 4.9"

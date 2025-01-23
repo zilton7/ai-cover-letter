@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   include Pagy::Backend
 
+  before_action :authenticate_user!
   before_action :set_job, only: %i[show edit update destroy]
 
   # GET /jobs or /jobs.json

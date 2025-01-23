@@ -1,0 +1,25 @@
+<div class="w-full max-w-xs mx-auto flex items-center justify-center">
+  <div class="flex flex-col items-center">
+    <div class="mb-8">
+      <%#= render 'shared/logo_and_name' %>
+    </div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'}) do |f| %>
+      <h2 class="text-center">Log in</h2>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="mb-4">
+        <%= f.label :email, "Email", class: "block text-sm font-bold mb-2 text-gray-700"  %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :password, "Password", class: "block text-sm font-bold mb-2 text-gray-700" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      </div>
+      <div class="flex items-center justify-between content-end">
+        <%= f.submit "Log in", class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center \
+                                     overflow-hidden rounded-full h-10 px-4 bg-[#136835] text-[#f8fbfa] hover:scale-[1.05] text-sm \
+                                     font-bold leading-normal tracking-[0.015em]" %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+</div>
