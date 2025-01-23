@@ -124,6 +124,8 @@ RSpec.describe JobsController, type: :controller do
         patch :update, params: { id: job.id, job: valid_attributes }, format: :turbo_stream
 
         expect(response).to have_http_status(:ok)
+        expect(response.media_type).to eq 'text/vnd.turbo-stream.html'
+        expect(response.body).to include('turbo-modal')
         expect(job.reload.description).to eq('Updated description.')
       end
 
