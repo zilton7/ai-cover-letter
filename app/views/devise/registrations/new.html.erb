@@ -12,12 +12,6 @@
       input_classes = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight \
                        focus:outline-none focus:shadow-outline #{alert ? "border-red-500" : nil}"
     %>
-      <div class="mb-4" data-controller="username">
-        <%= f.label :username, "Username", class: label_classes %>
-        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: input_classes,
-                                    data: { action: "input->username#check", username_target: "input" } %>
-        <span data-username-target="message" class="help-text"></span>
-      </div>
       <div class="mb-4">
         <%= f.label :email, "Email", class: label_classes %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: input_classes %>

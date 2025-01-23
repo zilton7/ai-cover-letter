@@ -2,6 +2,8 @@ class Job < ApplicationRecord
   has_many :cover_letters, dependent: :destroy
   has_one :resume
 
+  belongs_to :user
+
   accepts_nested_attributes_for :resume
   validates_presence_of :resume
   validates_associated :resume
