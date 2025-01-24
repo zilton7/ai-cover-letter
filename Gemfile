@@ -63,17 +63,19 @@ group :development, :test do
   gem 'webmock'
 end
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
   gem 'webdrivers', '~> 5.0', require: false
 end
 
+gem 'devise', '~> 4.9'
+gem 'pagy', '~> 9.3'
 gem 'pdf-reader', '~> 2.13'
 gem 'redis', '~> 5.3'
 gem 'simple_form', '~> 5.3'
 gem 'simple_form-tailwind'
-
-gem 'pagy', '~> 9.3'
-
-gem "devise", "~> 4.9"

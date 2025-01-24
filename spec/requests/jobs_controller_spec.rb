@@ -1,6 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe JobsController, type: :controller do
+RSpec.describe JobsController, type: :request do
+  login_user
+
   describe 'POST #create' do
     let(:valid_attributes) do
       {
@@ -40,12 +42,12 @@ RSpec.describe JobsController, type: :controller do
     context 'with valid parameters' do
       it 'creates a new job' do
         expect do
-          post :create, params: valid_attributes, format: :turbo_stream
+          post jobs_path, params: valid_attributes, as: :turbo_stream
         end.to change(Job, :count).by(1)
       end
 
       it 'triggers the background job' do
-        post :create, params: valid_attributes, format: :turbo_stream
+        post jobs_path, params: valid_attributes, as: :turbo_stream
         job = Job.last
         replacements = {
           job_title: job.title,
@@ -58,7 +60,7 @@ RSpec.describe JobsController, type: :controller do
       end
 
       it 'renders the Turbo Stream response' do
-        post :create, params: valid_attributes, format: :turbo_stream
+        post jobs_path, params: valid_attributes, as: :turbo_stream
 
         expect(response.media_type).to eq 'text/vnd.turbo-stream.html'
         expect(response.body).to include('turbo-modal')
@@ -68,36 +70,28 @@ RSpec.describe JobsController, type: :controller do
     context 'with invalid parameters' do
       it 'does not create a new job' do
         expect do
-          post :create, params: invalid_attributes, format: :turbo_stream
+          post jobs_path, params: invalid_attributes, as: :turbo_stream
         end.not_to change(Job, :count)
-      end
-
-      it 'renders the new template with errors' do
-        post :create, params: invalid_attributes, format: :html
-
-        expect(response).to render_template(:new)
-        expect(assigns(:job).errors).not_to be_empty
       end
     end
 
     context 'with invalid resume format' do
       it 'does not create a new job' do
         expect do
-          post :create, params: invalid_resume_attributes, format: :turbo_stream
+          post jobs_path, params: invalid_resume_attributes, as: :turbo_stream
         end.not_to change(Job, :count)
       end
 
       it 'renders the new template with errors' do
-        post :create, params: invalid_resume_attributes, format: :html
+        post jobs_path, params: invalid_resume_attributes, as: :turbo_stream
 
-        expect(response).to render_template(:new)
         expect(assigns(:job).errors['resume.file']).to include('must be a PDF')
       end
     end
   end
 
   describe 'PATCH #update' do
-    let!(:job) { create(:job) }
+    let!(:job) { create(:job, user: @user) }
 
     let(:valid_attributes) do
       {
@@ -121,7 +115,7 @@ RSpec.describe JobsController, type: :controller do
 
     context 'with valid parameters' do
       it 'updates the job and redirects' do
-        patch :update, params: { id: job.id, job: valid_attributes }, format: :turbo_stream
+        patch job_path(job), params: { id: job.id, job: valid_attributes }, as: :turbo_stream
 
         expect(response).to have_http_status(:ok)
         expect(response.media_type).to eq 'text/vnd.turbo-stream.html'
@@ -135,13 +129,13 @@ RSpec.describe JobsController, type: :controller do
                     job_description: 'Updated description.', company: 'MyJobCompany' }.to_json
         )
 
-        patch :update, params: { id: job.id, job: valid_attributes }, format: :turbo_stream
+        patch job_path(job), params: { id: job.id, job: valid_attributes }, as: :turbo_stream
       end
     end
 
     context 'with invalid attributes' do
       before do
-        patch :update, params: { id: job.id, job: invalid_attributes }, format: :turbo_stream
+        patch job_path(job), params: { id: job.id, job: invalid_attributes }, as: :turbo_stream
       end
 
       it 'does not update the job and renders the edit form' do

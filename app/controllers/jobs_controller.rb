@@ -7,7 +7,7 @@ class JobsController < ApplicationController
   # GET /jobs or /jobs.json
   def index
     @title = 'Your Jobs'
-    @pagy, @jobs = pagy(Job.all) # TODO: add current_user scope
+    @pagy, @jobs = pagy(current_user.jobs)
 
     respond_to do |format|
       format.html
@@ -30,9 +30,8 @@ class JobsController < ApplicationController
 
   # POST /jobs or /jobs.json
   def create
-    @job = Job.new(job_params)
-
-    if @job.save
+    @job = Job.new(job_params.merge(user: current_user))
+    if @job.save!
       @job.resume.extract_content
       # Trigger AI API call banground job with job's details
       replacements = {

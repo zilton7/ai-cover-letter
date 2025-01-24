@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Jobs management', type: :system, js: true do
+  login_user
+
   let(:valid_attributes) do
     {
       title: 'Regional co-manager',
@@ -103,7 +105,7 @@ RSpec.describe 'Jobs management', type: :system, js: true do
 
   describe 'Job index' do
     it 'displays a list of jobs' do
-      Job.create!(valid_attributes)
+      Job.create!(valid_attributes.merge(user: @user))
       visit jobs_path
 
       expect(page).to have_content(valid_attributes[:title])
@@ -119,7 +121,7 @@ RSpec.describe 'Jobs management', type: :system, js: true do
   end
 
   describe 'Job edit' do
-    let(:job) { create(:job, :with_cover_letter) }
+    let(:job) { create(:job, :with_cover_letter, user: @user) }
 
     it 'displays job details' do
       go_to_job_details(job)

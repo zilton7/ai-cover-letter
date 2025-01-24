@@ -2,7 +2,7 @@
   <div class="flex flex-1 justify-center py-5">
     <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center">
       <div class="flex flex-wrap justify-center gap-3 p-4 mt-5">
-        <% editing_mode = controller.action_name == 'new' ? false : true  %>
+        <% editing_mode = controller.action_name.in?(['edit', 'update']) ? true : false  %>
         <% if editing_mode %>
           <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
         <% else %>
