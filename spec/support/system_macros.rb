@@ -1,8 +1,8 @@
 module SystemMacros
-  def login_user
+  def login_user(user = nil)
     before(:each) do
-      @user = create(:user)
-      login_as(@user, scope: :user)
+      @user = user || create(:user)
+      login_as(@user)
     end
   end
 end
