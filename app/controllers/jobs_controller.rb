@@ -31,7 +31,7 @@ class JobsController < ApplicationController
   # POST /jobs or /jobs.json
   def create
     @job = Job.new(job_params.merge(user: current_user))
-    if @job.save!
+    if @job.save
       @job.resume.extract_content
       # Trigger AI API call banground job with job's details
       replacements = {
