@@ -18,13 +18,14 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
+  <body class="flex flex-col min-h-screen">
     <%= turbo_stream_from 'ai_response' %>
     <%= turbo_frame_tag "turbo-modal" %>
-    <main class="layout-container flex h-full grow flex-col">
+    <%= turbo_stream_from "flash" %>
+    <main class="flex-grow">
       <%= render 'shared/navbar' %>
       <%= yield %>
-      <%= render 'shared/footer' %>
     </main>
+    <%= render 'shared/footer' %>
   </body>
 </html>

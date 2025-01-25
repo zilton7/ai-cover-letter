@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
+  devise_for :users, path: '',
+                     controllers: {
+                       registrations: 'users/registrations',
+                       sessions: 'users/sessions'
+                     },
+                     path_names: {
+                       sign_in: 'login',
+                       sign_out: 'logout',
+                       sign_up: 'register'
+                     }
 
   resources :jobs
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
