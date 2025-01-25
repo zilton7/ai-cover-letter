@@ -2,21 +2,19 @@ require 'rails_helper'
 include ActiveJob::TestHelper
 ActiveJob::Base.queue_adapter = :test
 
-RSpec.describe 'SignUpProcesses', type: :system, js: true do
+RSpec.describe 'SignUpProcess', type: :system, js: true do
   it 'should require the user to sign up and successfully sign up' do
     visit root_path
 
     within '#navbar' do
-      click_on 'Sign up'
+      click_on 'Register'
     end
 
-    within 'turbo-frame#registration_form' do
-      within '#new_user' do
-        fill_in 'user_email', with: 'test@test.com'
-        fill_in 'user_password', with: 'password123'
-        fill_in 'user_password_confirmation', with: 'password123'
-        click_on 'Register'
-      end
+    within '#new_user' do
+      fill_in 'user_email', with: 'test@test.com'
+      fill_in 'user_password', with: 'password123'
+      fill_in 'user_password_confirmation', with: 'password123'
+      click_on 'Register'
     end
 
     expect(page).to have_content('Cover Letters Generated!')
@@ -28,14 +26,12 @@ RSpec.describe 'SignUpProcesses', type: :system, js: true do
     find('.navbar-toggler').click if has_css?('.navbar-toggler', visible: true)
 
     within '#navbar' do
-      click_on 'Sign up'
+      click_on 'Register'
     end
 
-    within 'turbo-frame#registration_form' do
-      within '#new_user' do
-        fill_in 'user_email', with: 'test'
-        fill_in 'user_password', with: 'p'
-      end
+    within '#new_user' do
+      fill_in 'user_email', with: 'test'
+      fill_in 'user_password', with: 'p'
     end
 
     click_button 'Register'
