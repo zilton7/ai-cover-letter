@@ -113,6 +113,17 @@ RSpec.describe 'Jobs management', type: :system, js: true do
       expect(page).to have_content(valid_attributes[:company])
     end
 
+    it 'Updates \'Cover Letters Generated!\' count' do
+      create(:cover_letter_count)
+      visit new_job_path
+
+      expect(page).to have_content(/0 Cover Letters Generated!/)
+
+      create(:cover_letter)
+
+      expect(page).to have_content(/1 Cover Letters Generated!/)
+    end
+
     it 'allows to set applied' do
       job = Job.create!(valid_attributes.merge(user: @user))
       expect(job.applied).to eq(false)

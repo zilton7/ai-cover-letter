@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "ai_response_for_user_1" do %>
+<%= turbo_frame_tag "ai_response_for_user_#{user.id}" do %>
   <div data-clipboard-target="source" data-cover-letter-target="content">
-    <%= cover_letter.gsub("\n", "<br>").html_safe %>
+    <%= cover_letter&.gsub("\n", "<br>")&.html_safe %>
   </div>
 <% end %>

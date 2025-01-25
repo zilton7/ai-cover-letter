@@ -32,9 +32,9 @@ class GenerateCoverLetterGroqAiJob
     # Broadcast the content to the turbo frame
     Turbo::StreamsChannel.broadcast_replace_to(
       'ai_response',
-      target: 'ai_response_for_user',
+      target: "ai_response_for_user_#{cover_letter.job.user.id}",
       partial: 'cover_letters/cover_letter',
-      locals: { cover_letter: body }
+      locals: { cover_letter: body, user: cover_letter.job.user }
     )
   end
 end

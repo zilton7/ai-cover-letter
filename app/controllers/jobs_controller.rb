@@ -47,7 +47,7 @@ class JobsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace('turbo-modal',
-                                                    target: 'ai_response_for_user',
+                                                    target: "ai_response_for_user_#{current_user.id}",
                                                     partial: 'response_modal')
         end
       end
@@ -93,7 +93,7 @@ class JobsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace('turbo-modal',
-                                                    target: 'ai_response_for_user',
+                                                    target: "ai_response_for_user_#{current_user.id}",
                                                     partial: 'response_modal')
         end
       end

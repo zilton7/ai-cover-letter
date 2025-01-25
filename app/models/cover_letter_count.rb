@@ -1,0 +1,2 @@
+class CoverLetterCount < ApplicationRecord
+end

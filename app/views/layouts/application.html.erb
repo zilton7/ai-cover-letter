@@ -21,7 +21,7 @@
   <body class="flex flex-col min-h-screen">
     <%= turbo_stream_from 'ai_response' %>
     <%= turbo_frame_tag "turbo-modal" %>
-    <%= turbo_stream_from "flash" %>
+    <%= turbo_stream_from 'cover-letters-count' %>
     <main class="flex-grow">
       <%= render 'shared/navbar' %>
       <%= yield %>

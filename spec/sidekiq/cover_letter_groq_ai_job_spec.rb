@@ -47,9 +47,9 @@ RSpec.describe GenerateCoverLetterGroqAiJob, type: :job do
 
       expect(Turbo::StreamsChannel).to have_received(:broadcast_replace_to).with(
         'ai_response',
-        target: 'ai_response_for_user',
+        target: "ai_response_for_user_#{cover_letter.job.user.id}",
         partial: 'cover_letters/cover_letter',
-        locals: { cover_letter: 'Generated cover letter content' }
+        locals: { cover_letter: 'Generated cover letter content', user: cover_letter.job.user }
       )
     end
 
@@ -69,9 +69,9 @@ RSpec.describe GenerateCoverLetterGroqAiJob, type: :job do
 
         expect(Turbo::StreamsChannel).to have_received(:broadcast_replace_to).with(
           'ai_response',
-          target: 'ai_response_for_user',
+          target: "ai_response_for_user_#{cover_letter.job.user.id}",
           partial: 'cover_letters/cover_letter',
-          locals: { cover_letter: 'Error: API Error occurred' }
+          locals: { cover_letter: 'Error: API Error occurred', user: cover_letter.job.user }
         )
       end
     end
@@ -81,14 +81,16 @@ RSpec.describe GenerateCoverLetterGroqAiJob, type: :job do
         allow_any_instance_of(CoverLetter).to receive(:save).and_return(false)
       end
 
+      let(:current_user) { User.last }
+
       it 'broadcasts an error message' do
         described_class.new.perform(job_id, replacements)
 
         expect(Turbo::StreamsChannel).to have_received(:broadcast_replace_to).with(
           'ai_response',
-          target: 'ai_response_for_user',
+          target: "ai_response_for_user_#{current_user.id}",
           partial: 'cover_letters/cover_letter',
-          locals: { cover_letter: 'Error Occured' }
+          locals: { cover_letter: 'Error Occured', user: current_user }
         )
       end
     end
