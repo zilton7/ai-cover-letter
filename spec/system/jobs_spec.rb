@@ -106,10 +106,23 @@ RSpec.describe 'Jobs management', type: :system, js: true do
   describe 'Job index' do
     it 'displays a list of jobs' do
       Job.create!(valid_attributes.merge(user: @user))
+
       visit jobs_path
 
       expect(page).to have_content(valid_attributes[:title])
       expect(page).to have_content(valid_attributes[:company])
+    end
+
+    it 'allows to set applied' do
+      job = Job.create!(valid_attributes.merge(user: @user))
+      expect(job.applied).to eq(false)
+
+      visit jobs_path
+      check 'job_applied'
+      expect(page).to have_checked_field('job_applied')
+      job.reload
+
+      expect(job.applied).to eq(true)
     end
   end
 

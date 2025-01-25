@@ -69,6 +69,12 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
 
+    if job_params[:applied].present?
+      @job.applied = job_params[:applied]
+      @job.save(validate: false)
+      return
+    end
+
     if @job.update(job_params.except(:title, :company, :location))
       # Trigger content extraction if the resume is updated
       @job.resume.extract_content if params[:job][:resume_attributes].present? && params[:job][:resume_attributes][:file].present?
@@ -124,7 +130,7 @@ class JobsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def job_params
     params.require(:job).permit(
-      :title, :company, :location, :description,
+      :title, :company, :location, :description, :applied,
       resume_attributes: [:file]
     )
   end
