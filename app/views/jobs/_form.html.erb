@@ -7,7 +7,7 @@
           <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
         <% else %>
           <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight min-w-72">
-            <span id='cover-letters-count'><%= CoverLetterCount&.first&.count || 0 %></span> Cover Letters Generated! 🎉
+            <span id='cover-letters-count'><%= CoverLetterCount&.count || 0 %></span> Cover Letters Generated! 🎉
           </p>
         <% end %>
       </div>
