@@ -22,6 +22,7 @@
     <%= turbo_stream_from 'ai_response' %>
     <%= turbo_frame_tag "turbo-modal" %>
     <%= turbo_stream_from 'cover-letters-count' %>
+    <%= render "shared/flash" %>
     <main class="flex-grow">
       <%= render 'shared/navbar' %>
       <%= yield %>

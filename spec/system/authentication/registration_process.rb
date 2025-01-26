@@ -1,8 +1,11 @@
 require 'rails_helper'
-include ActiveJob::TestHelper
-ActiveJob::Base.queue_adapter = :test
 
 RSpec.describe 'RegistrationProcess', type: :system, js: true do
+  # close flash message if existing
+  # before do
+  #   page.click_link('close-flash-notification') if page.has_link?('close-flash-notification')
+  # end
+
   it 'should require the user to sign up and successfully sign up' do
     visit root_path
 
