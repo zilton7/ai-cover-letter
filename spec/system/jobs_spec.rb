@@ -127,6 +127,7 @@ RSpec.describe 'Jobs management', type: :system, js: true do
     it 'allows to set applied' do
       job = Job.create!(valid_attributes.merge(user: @user))
       expect(job.applied).to eq(false)
+      expect(page).to_not have_selector('.line-through')
 
       visit jobs_path
       check 'job_applied'
@@ -134,6 +135,7 @@ RSpec.describe 'Jobs management', type: :system, js: true do
       job.reload
 
       expect(job.applied).to eq(true)
+      expect(page).to have_selector('.line-through')
     end
   end
 
@@ -145,7 +147,7 @@ RSpec.describe 'Jobs management', type: :system, js: true do
   end
 
   describe 'Job edit' do
-    let(:job) { create(:job, :with_cover_letter, user: @user) }
+    let!(:job) { create(:job, :with_cover_letter, user: @user) }
 
     it 'displays job details' do
       go_to_job_details(job)
@@ -217,6 +219,17 @@ RSpec.describe 'Jobs management', type: :system, js: true do
       click_on 'Create New Cover Letter'
 
       expect(page).to have_content('Resume can\'t be blank')
+    end
+
+    it 'displays existing cover letters' do
+      visit jobs_path
+      click_on job.full_title
+
+      click_on 'Display Cover Letters'
+      cover_letter_title = job.cover_letters.first.title_with_datetime
+
+      expect(page).to have_content(cover_letter_title)
+      expect(page).to have_content('This is the content created by FactoryBot')
     end
   end
 end
