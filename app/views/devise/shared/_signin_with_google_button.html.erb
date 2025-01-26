@@ -103,7 +103,9 @@
     opacity: 8%;
   }
 </style>
-<%= button_to user_google_oauth2_omniauth_authorize_path, class: "gsi-material-button", method: :post, data: { turbo: 'false' } do %>
+<%= button_to user_google_oauth2_omniauth_authorize_path, id: 'login_with_google_oauth2',
+                                                          class: "gsi-material-button",
+                                                          method: :post, data: { turbo: 'false' } do %>
   <div class="gsi-material-button-state"></div>
   <div class="gsi-material-button-content-wrapper">
     <div class="gsi-material-button-icon">

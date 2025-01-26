@@ -2,7 +2,7 @@ require 'rails_helper'
 include ActiveJob::TestHelper
 ActiveJob::Base.queue_adapter = :test
 
-RSpec.describe 'SignUpProcess', type: :system, js: true do
+RSpec.describe 'RegistrationProcess', type: :system, js: true do
   it 'should require the user to sign up and successfully sign up' do
     visit root_path
 

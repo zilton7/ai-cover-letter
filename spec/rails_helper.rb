@@ -27,6 +27,10 @@ RSpec.configure do |config|
   config.extend RequestMacros, type: :request
   config.extend SystemMacros, type: :system
 
+  config.include OmniauthMacros, type: :system
+
+  OmniAuth.config.test_mode = true
+
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'SignInProcess', type: :system, js: true do
+RSpec.describe 'LoginProcess', type: :system, js: true do
   let(:password) { '123456789' }
   let(:user) do
     FactoryBot.create(:user, {
