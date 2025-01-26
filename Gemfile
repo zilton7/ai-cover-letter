@@ -74,7 +74,7 @@ group :development do
 end
 
 gem 'devise', '~> 4.9'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 1.2.0'
 gem 'omniauth-rails_csrf_protection'
 gem 'pagy', '~> 9.3'
 gem 'pdf-reader', '~> 2.13'
