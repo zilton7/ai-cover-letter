@@ -4,6 +4,8 @@ class Job < ApplicationRecord
 
   belongs_to :user, optional: true
 
+  before_create { description.strip! }
+
   accepts_nested_attributes_for :resume
   validates_presence_of :resume
   validates_associated :resume
