@@ -13,4 +13,8 @@ class User < ApplicationRecord
     create_with(uid: u[:uid], provider: 'google',
                 password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
   end
+
+  def admin?
+    email.in? ['zilasino27@gmail.com', 'kps-17@hotmail.com']
+  end
 end

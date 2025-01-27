@@ -12,10 +12,15 @@
     </div>
   <% end %>
   <div class="flex flex-1 justify-end gap-8">
+    <% if user_signed_in? %>
+      <div class="bg-gray-100 p-4">
+        <p class="text-sm">Credits: <%= current_user.credits %></p>
+      </div>
+    <% end %>
     <% if current_user.present? %>
       <div class="flex items-center gap-9">
-        <%= link_to 'Your Jobs', jobs_path, class: 'text-[#1C160C] text-sm font-medium leading-normal'%>
-        <a class="text-[#1C160C] text-sm font-medium leading-normal" href="#">Account</a>
+        <%= link_to 'Your Jobs', jobs_path, class: 'text-[#1C160C] text-sm font-medium leading-normal' %>
+        <%= link_to 'Subscription', subscriptions_path, class: 'text-[#1C160C] text-sm font-medium leading-normal' %>
       </div>
     <% end %>
     <% if current_user.present? %>
