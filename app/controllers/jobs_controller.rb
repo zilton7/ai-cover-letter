@@ -92,6 +92,8 @@ class JobsController < ApplicationController
 
       GenerateCoverLetterGroqAiJob.perform_async(@job.id, replacements.to_json)
 
+      current_user.deduct_credit!
+
       # Respond with a success message
       respond_to do |format|
         format.turbo_stream do

@@ -35,5 +35,9 @@ class User < ApplicationRecord
 
     credits = self.credits -= 1
     update(credits:)
+
+    broadcast_update_to 'credits',
+                        target: "credits_for_user_#{id}",
+                        html: "<p class=\"text-sm\">Credits: <span class=\"font-bold text-[#019863af]\">#{credits}</span></p>"
   end
 end

@@ -15,7 +15,9 @@
     <% if user_signed_in? %>
       <%= link_to subscriptions_path do %>
         <div class="bg-[#F4EFE6] p-3 rounded-xl">
-          <p class="text-sm">Credits: <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span></p>
+          <%= turbo_frame_tag "credits_for_user_#{current_user.id}" do %>
+            <p class="text-sm">Credits: <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span></p>
+          <% end %>
         </div>
       <% end %>
     <% end %>
