@@ -4,7 +4,13 @@
     <div class="flex flex-col gap-4 w-full">
       <div class="p-4 flex flex-col items-center justify-center gap-3">
         <p class='text-xl'>👋 Hey, <%= current_user.email %>!</p>
-        <p class="text-lg">You have <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span> credits left</p>
+        <% if current_user.subscribed? %>
+          <p class="text-lg">You currently subscribed to
+            <span class="font-bold text-[#019863af]"><%= current_user.subscription.plan.capitalize %></span> plan!
+          </p>
+        <% else %>
+          <p class="text-lg">You have <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span> credits left</p>
+        <% end %>
       </div>
       <div class="flex flex-row justify-center gap-5">
         <% STRIPE_PLANS.each do |key, plan| %>
