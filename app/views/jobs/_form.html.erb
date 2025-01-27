@@ -78,12 +78,22 @@
             <% end %>
           <% end %>
           <div class="flex px-4 py-3 justify-center">
-            <%= f.submit "#{editing_mode ? 'Create New Cover Letter' : 'Generate Cover Letter' }", class: "flex min-w-[84px] cursor-pointer items-center \
-            justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
-            bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal \
-            tracking-[0.015em] hover:scale-[1.0125]",
-            data: { turbo_submits_with: 'Loading...' } %>
-          </div>
+            <% if current_user.subscribed? || current_user.credits.positive? %>
+              <%= f.submit "#{editing_mode ? 'Create New Cover Letter' : 'Generate Cover Letter' }",
+                        class: "flex min-w-[84px] cursor-pointer items-center \
+                                justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
+                                bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal \
+                                tracking-[0.015em] hover:scale-[1.0125]",
+                        data: { turbo_submits_with: 'Loading...' } %>
+            </div>
+          <% else %>
+            <%= f.submit "#{editing_mode ? 'Create New Cover Letter' : 'Generate Cover Letter' }",
+                          disabled: true, title: 'No free credits left. Subscribe Now!',
+                          class: "flex min-w-[84px] cursor-pointer items-center \
+                                  justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \
+                                  bg-[#019863] opacity-60 text-[#FFFFFF] text-base font-bold leading-normal \
+                                  tracking-[0.015em] cursor-not-allowed" %>
+          <% end %>
         <% end %>
       </div>
     </div>
