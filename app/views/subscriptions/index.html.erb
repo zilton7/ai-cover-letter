@@ -1,14 +1,27 @@
-<div class="max-w-md mx-auto mt-10">
-  <h2 class="text-2xl font-bold mb-4">Choose a Plan</h2>
-  <div class="space-y-4">
-    <% STRIPE_PLANS.each do |key, plan| %>
-      <div class="p-6 border rounded-lg">
-        <h3 class="text-xl font-semibold"><%= plan[:name] %></h3>
-        <p class="text-gray-600">$<%= plan[:price] / 100 %>/month</p>
-        <%= button_to "Subscribe", checkout_index_path(plan: key),
-        class: "mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" ,
-        data: { turbo: false }%>
+<div class="p-4 flex justify-center min-h-screen">
+  <div class="flex min-w-[40vw] max-w-1/2 items-stretch justify-between gap-4 h-[50vh] mt-10
+              rounded-xl bg-[#FFFFFF] p-4 shadow border border-[#019863]">
+    <div class="flex flex-col gap-4 w-full">
+      <div class="flex justify-center">
+        <h2 class="text-2xl font-bold mb-4">Choose Subscription</h2>
       </div>
-    <% end %>
+      <div class="p-4 flex justify-center">
+        <p class="text-lg">You have <span class="font-bold text-[#019863af]"><%= current_user.credits %></span> credits left</p>
+      </div>
+      <div class="flex flex-row justify-center gap-5">
+        <% STRIPE_PLANS.each do |key, plan| %>
+          <div class="p-6 border rounded-lg hover:scale-[1.025] flex flex-col \
+                      justify-center items-center min-h-1/2 <%= plan[:most_popular] ? 'bg-gray-200 border-[#019863]' : '' %>">
+            <p class="text-gray-600 text-3xl font-bold">$<%= plan[:price] / 100.0 %></p>
+            <p>Per Month</p>
+            <h3 class="mt-2"><%= plan[:name] %></h3>
+            <h3 class="font-semibold mt-2"><%= plan[:description] %></h3>
+            <%= button_to "Subscribe", checkout_index_path(plan: key),
+                class: "mt-4 px-4 py-2 bg-[#019863] text-white rounded hover:scale-[1.025]",
+                data: { turbo: false } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
