@@ -2,11 +2,9 @@
   <div class="flex min-w-[40vw] max-w-1/2 items-stretch justify-between gap-4 h-[50vh] mt-10
               rounded-xl bg-[#FFFFFF] p-4 shadow border border-[#019863]">
     <div class="flex flex-col gap-4 w-full">
-      <div class="flex justify-center">
-        <h2 class="text-2xl font-bold mb-4">Choose Subscription</h2>
-      </div>
-      <div class="p-4 flex justify-center">
-        <p class="text-lg">You have <span class="font-bold text-[#019863af]"><%= current_user.credits %></span> credits left</p>
+      <div class="p-4 flex flex-col items-center justify-center gap-3">
+        <p class='text-xl'>👋 Hey, <%= current_user.email %>!</p>
+        <p class="text-lg">You have <span class="font-bold text-[#019863af]"><%= current_user.credit_count %></span> credits left</p>
       </div>
       <div class="flex flex-row justify-center gap-5">
         <% STRIPE_PLANS.each do |key, plan| %>
