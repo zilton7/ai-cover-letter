@@ -11,7 +11,7 @@ RSpec.feature 'LoginWithGoogleOauth2Process', type: :system, js: true do
     find('#login_with_google_oauth2').click
 
     expect(page).to have_content('Successfully authenticated from Google account.')
-    expect(page).to have_content('Account')
+    expect(page).to have_content('Subscription')
   end
 
   scenario 'user fails to sign in with google_oauth2' do

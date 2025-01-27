@@ -22,7 +22,7 @@ RSpec.describe 'LoginProcess', type: :system, js: true do
       click_on 'Login'
     end
 
-    expect(page).to have_content('Account')
+    expect(page).to have_content('Subscription')
   end
 
   it 'should fail on an invalid user' do

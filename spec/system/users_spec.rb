@@ -18,7 +18,7 @@ RSpec.describe 'Users management', type: :system, js: true do
     it 'can access it' do
       visit root_path
 
-      expect(page).to have_content('Account')
+      expect(page).to have_content('Subscription')
     end
 
     it 'can access jobs index view' do

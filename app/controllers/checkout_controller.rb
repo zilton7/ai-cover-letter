@@ -12,7 +12,10 @@ class CheckoutController < ApplicationController
       mode: 'subscription',
       success_url: success_checkout_index_url,
       cancel_url: cancel_checkout_index_url,
-      customer_email: current_user.email
+      customer_email: current_user.email,
+      metadata: {
+        plan: params[:plan] # Pass the plan name as metadata
+      }
     )
 
     redirect_to session.url, allow_other_host: true

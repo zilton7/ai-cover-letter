@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
+  has_one :subscription, dependent: :destroy
+
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google',
                 password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
@@ -16,5 +18,22 @@ class User < ApplicationRecord
 
   def admin?
     email.in? ['zilasino27@gmail.com', 'kps-17@hotmail.com']
+  end
+
+  def subscribed?
+    subscription&.status == 'active'
+  end
+
+  def credits_count
+    return "\u{221E}" if subscribed?
+
+    credits
+  end
+
+  def deduct_credit!
+    return if subscribed? || credits.zero?
+
+    credits = self.credits -= 1
+    update(credits:)
   end
 end

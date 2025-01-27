@@ -43,6 +43,9 @@ class JobsController < ApplicationController
 
       GenerateCoverLetterGroqAiJob.perform_async(@job.id, replacements.to_json)
 
+      # TODO: implement success? resposne in GenerateCoverLetterGroqAiJob
+      current_user.deduct_credit!
+
       # Respond with AI response to be shown in modal
       respond_to do |format|
         format.turbo_stream do
