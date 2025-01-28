@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe JobsController, type: :request do
+RSpec.describe 'Jobs', type: :request do
   login_user
 
   describe 'POST #create' do

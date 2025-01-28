@@ -6,10 +6,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :jobs, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   validates :email, presence: true
-
-  has_many :subscriptions, dependent: :destroy
 
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google',

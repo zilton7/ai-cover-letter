@@ -13,7 +13,7 @@ FactoryBot.define do
 
     trait :with_cover_letter do
       after(:build) do |job|
-        job.cover_letters << build(:cover_letter, job: job)
+        create_list(:cover_letter, 1, job:)
       end
     end
   end

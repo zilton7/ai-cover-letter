@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :subscription do
-    user { nil }
-    stripe_subscription_id { "MyString" }
-    plan { "MyString" }
-    status { "MyString" }
+    association :user
+    stripe_subscription_id { "sub_#{SecureRandom.hex(10)}" }
+    status { 'active' }
+    plan { 'created by FactoryBot' }
   end
 end
