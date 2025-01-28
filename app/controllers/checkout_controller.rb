@@ -53,9 +53,7 @@ class CheckoutController < ApplicationController
   end
 
   def success
-    current_user.subscriptions.each do |subscription|
-      subscription.destroy unless subscription.status == 'active'
-    end
+    current_user.subscriptions.each { it.destroy unless it.active? }
 
     flash[:notice] = 'Subscription successful!'
     redirect_to root_path

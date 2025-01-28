@@ -8,4 +8,8 @@ class Subscription < ApplicationRecord
   def status_name
     status.gsub('_', ' ')
   end
+
+  def active?
+    status == 'active'
+  end
 end
