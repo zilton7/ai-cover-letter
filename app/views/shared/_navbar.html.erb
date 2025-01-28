@@ -23,6 +23,11 @@
     <% end %>
     <% if current_user.present? %>
       <div class="flex items-center gap-9">
+        <%= link_to new_job_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
+                       rounded-full h-10 px-4 border border-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal \
+                       tracking-[0.015em]" do %>
+          <span class="truncate">New Job</span>
+        <% end %>
         <%= link_to 'Your Jobs', jobs_path, class: 'text-[#1C160C] text-sm font-medium leading-normal' %>
         <%= link_to 'Subscription', subscriptions_path, class: 'text-[#1C160C] text-sm font-medium leading-normal' %>
       </div>

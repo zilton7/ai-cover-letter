@@ -21,7 +21,25 @@ class CheckoutController < ApplicationController
     redirect_to session.url, allow_other_host: true
   end
 
+  def cancel_subscription
+    subscription = current_user.subscription
+    return redirect_to root_path, alert: 'No active subscription found.' unless subscription
+
+    # Immediately cancel the subscription
+    Stripe::Subscription.cancel(subscription.stripe_subscription_id)
+
+    # Update local subscription status
+    subscription.update(
+      status: 'canceled'
+    )
+
+    redirect_to root_path, notice: 'Your subscription has been canceled.'
+  rescue Stripe::StripeError => e
+    redirect_to root_path, alert: "Error canceling subscription: #{e.message}"
+  end
+
   def success
+    current_user.subscriptions.map { |subscription| subscription.destroy unless subscription.status == 'active' }
     # Handle successful subscription
     flash[:notice] = 'Subscription successful!'
     redirect_to root_path

@@ -5,11 +5,24 @@
       <div class="p-4 flex flex-col items-center justify-center gap-3">
         <p class='text-xl'>👋 Hey, <%= current_user.email %>!</p>
         <% if current_user.subscribed? %>
-          <p class="text-lg">You currently subscribed to
-            <span class="font-bold text-[#019863af]"><%= current_user.subscription.plan.capitalize %></span> plan!
-          </p>
+          <div class="flex flex-row gap-2">
+            <p class="text-lg">You currently subscribed to
+              <span class="font-bold text-[#019863af]"><%= current_user.subscription.plan_name %></span> plan!
+            </p>
+            <%= button_to 'cancel', 
+                cancel_subscription_checkout_index_path, 
+                method: :delete,
+                class: 'text-red-500 border border-red-500 px-1 rounded-full text-sm',
+                form_class: 'inline-form',
+                data: { turbo_confirm: 'Are you sure you want to cancel your subscription?' } %>
+          </div>
         <% else %>
           <p class="text-lg">You have <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span> credits left</p>
+        <% end %>
+        <% if current_user.subscription.present? %>
+          <p class="text-lg">Status: 
+            <span class="font-bold <%=  current_user&.subscribed? ? 'text-[#019863af]' : 'text-red-300' %>"><%= current_user&.subscription.status_name %></span>
+          </p>
         <% end %>
       </div>
       <div class="flex flex-row justify-center gap-5">

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   root to: 'jobs#new'
 
   resources :checkout, only: [:create] do
+    delete 'cancel_subscription', on: :collection
     collection do
       get 'success'
       get 'cancel'

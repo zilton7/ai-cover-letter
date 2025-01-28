@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
-  has_one :subscription, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google',
@@ -18,6 +18,10 @@ class User < ApplicationRecord
 
   def admin?
     email.in? ['zilasino27@gmail.com', 'kps-17@hotmail.com']
+  end
+
+  def subscription
+    subscriptions.last
   end
 
   def subscribed?
