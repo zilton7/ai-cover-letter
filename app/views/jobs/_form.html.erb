@@ -12,7 +12,7 @@
         <% end %>
       </div>
       <div class="flex flex-wrap justify-center gap-4 px-4 py-3">
-        <%= simple_form_for(@job, html:{ class: "w-full", multipart: true }) do |f| %>
+        <%= simple_form_for(@job, html:{ class: "w-full", multipart: true }, data: { turbo: !(action_name == "new" && current_user.nil?) }) do |f| %>
           <%= f.input :title, label: false, input_html: { class: "form-input w-full flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                 text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                 focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
@@ -78,7 +78,7 @@
             <% end %>
           <% end %>
           <div class="flex px-4 py-3 justify-center">
-            <% if current_user.subscribed? || current_user.credits.positive? %>
+            <% if current_user&.subscribed? || current_user&.credits&.positive? || (action_name == "new" && current_user.nil?) %>
               <%= f.submit "#{editing_mode ? 'Create New Cover Letter' : 'Generate Cover Letter' }",
                         class: "flex min-w-[84px] cursor-pointer items-center \
                                 justify-center overflow-hidden rounded-full h-12 px-5 flex-1 \

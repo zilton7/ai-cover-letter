@@ -1,8 +1,5 @@
 <div class="w-full h-full max-w-xs mx-auto my-20 flex items-center justify-center">
   <div class="flex h-full flex-col items-center">
-    <div class="mb-8">
-      <%#= render 'shared/logo_and_name' %>
-    </div>
     <%= render 'devise/shared/signin_with_google_button' %>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
                                   data: { turbo_frame: '_top' },

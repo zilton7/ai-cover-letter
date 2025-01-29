@@ -105,6 +105,7 @@
 </style>
 <%= button_to user_google_oauth2_omniauth_authorize_path, id: 'login_with_google_oauth2',
                                                           class: "gsi-material-button",
+                                                          form: {  class: 'mb-4' },
                                                           method: :post, data: { turbo: 'false' } do %>
   <div class="gsi-material-button-state"></div>
   <div class="gsi-material-button-content-wrapper">

@@ -1,0 +1,27 @@
+default: &default
+  app_name: 'CoverLetterAI'
+  support_email: 'support@nobsdating.site'
+  name: 'NoBSDating'
+  description: 'Get ahead the competition by finding affiliate products on Lauchzilla before they launch!'
+  url: 'https://launchzilla.net'
+  domain: 'launchzilla.net'
+  fb_group: 'https://www.facebook.com/groups/3171679933109806'
+  twitter: 'https://twitter.com/LaunchzillaNet'
+  messenger: 'https://www.messenger.com/t/launchzilla'
+  email: 'info@launchzilla.net'
+  logo_url: 'https://launchcalendar.blob.core.windows.net/assets/logo-beta.png'
+  logo_black_url: 'https://launchcalendar.blob.core.windows.net/assets/logo-black.png'
+  logo_1080_url: 'https://launchcalendar.blob.core.windows.net/assets/logo-1080.png'
+  hero_image_url: 'https://launchcalendar.blob.core.windows.net/assets/hero-image.webp'
+  # logo_url: 'https://launchcalendar.blob.core.windows.net/assets/logo.png'
+  x_handle: '@LaunchzillaNet'
+  messenger_url: 'https://m.me/100066586455870'
+  ad_grid_canva_template_url: 'https://www.canva.com/design/DAGKrCVMZ-o/yrUhGKOQRaoMk99tMUhOuA/view?utm_content=DAGKrCVMZ-o&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview'
+development:
+  <<: *default
+
+production:
+  <<: *default
+
+test:
+  <<: *default
