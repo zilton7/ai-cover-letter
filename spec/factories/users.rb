@@ -5,8 +5,10 @@ FactoryBot.define do
     password_confirmation { '123456' }
     credits { 4 }
 
-    after(:build) do |user|
-      create_list(:subscription, 1, user:)
+    trait :with_active_subscription do
+      after(:build) do |user|
+        create_list(:subscription, 1, user:)
+      end
     end
 
     trait :with_job do

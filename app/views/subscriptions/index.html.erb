@@ -21,7 +21,7 @@
         <% end %>
         <% if current_user.subscription.present? %>
           <p class="text-lg">Status: 
-            <span class="font-bold <%=  current_user&.subscribed? ? 'text-[#019863af]' : 'text-red-300' %>"><%= current_user&.subscription.status_name %></span>
+            <span class="font-bold <%= current_user&.subscribed? ? 'text-[#019863af]' : 'text-red-300' %>"><%= current_user&.subscription.status_name %></span>
           </p>
         <% end %>
       </div>
@@ -33,7 +33,7 @@
             <p>Per Month</p>
             <h3 class="mt-2"><%= plan[:name] %></h3>
             <h3 class="font-semibold mt-2"><%= plan[:description] %></h3>
-            <%= button_to "Subscribe", checkout_index_path(plan: key),
+            <%= button_to "Subscribe", checkout_index_path(plan: key), id: key,
                 class: "mt-4 px-4 py-2 bg-[#019863] text-white rounded hover:scale-[1.025]",
                 data: { turbo: false } %>
           </div>

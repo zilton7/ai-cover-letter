@@ -8,7 +8,8 @@ require 'webdrivers'
 Webdrivers::Chromedriver.required_version = '125.0.6422.60'
 
 WebMock.disable_net_connect!(
-  allow_localhost: true
+  allow_localhost: true, # Allow requests to localhost
+  allow: /127\.0\.0\.1:\d+/ # Allow requests to 127.0.0.1 on any port
 )
 
 RSpec.configure do |config|
