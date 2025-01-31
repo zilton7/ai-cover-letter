@@ -10,10 +10,12 @@
   <div class="flex flex-1 justify-end gap-8">
     <% if user_signed_in? %>
       <%= link_to subscriptions_path do %>
-        <div class="bg-[#F4EFE6] p-3 rounded-xl">
-          <%= turbo_frame_tag "credits_for_user_#{current_user.id}" do %>
-            <p class="text-sm">Credits: <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span></p>
-          <% end %>
+        <div class="flex w-full justify-center">
+          <div class="bg-[#F4EFE6] border border-[#F4EFE6] hover:border-[#019863af] p-3 rounded-xl hover:scale-[0.95]">
+            <%= turbo_frame_tag "credits_for_user_#{current_user.id}" do %>
+              <p class="text-sm">Credits: <span class="font-bold text-[#019863af]"><%= current_user.credits_count %></span></p>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>
@@ -21,18 +23,21 @@
       <div class="flex items-center gap-9">
         <%= link_to new_job_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
                        rounded-full h-10 px-4 border border-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal \
-                       tracking-[0.015em]" do %>
+                       tracking-[0.015em] hover:border-[#019863af] hover:scale-[0.95]" do %>
           <span class="truncate">New Job</span>
         <% end %>
-        <%= link_to 'Your Jobs', jobs_path, class: 'text-[#1C160C] text-sm font-medium leading-normal' %>
-        <%= link_to 'Subscription', subscriptions_path, class: 'text-[#1C160C] text-sm font-medium leading-normal' %>
+        <%= link_to 'Your Jobs', jobs_path, class: 'text-[#1C160C] text-sm font-medium leading-normal hover:border-b \
+                                                    hover:border-[#019863af] hover:scale-[0.95]' %>
+        <%= link_to 'Subscription', subscriptions_path, class: 'text-[#1C160C] text-sm font-medium leading-normal hover:border-b \
+                                                    hover:border-[#019863af] hover:scale-[0.95]' %>
       </div>
     <% end %>
     <% if current_user.present? %>
       <div class="flex gap-2">
         <%= link_to destroy_user_session_path, class: "flex max-w-[480px] cursor-pointer items-center justify-center \
                                                       overflow-hidden rounded-full h-10 bg-[#F4EFE6] text-[#1C160C] \
-                                                      gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5",
+                                                      gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5\
+                                                      border border-[#F4EFE6] hover:border-[#019863af] hover:scale-[0.95]",
                                               data: { turbo_method: :delete, turbo_confirm: 'Logout?' } do %>
           <div class="text-[#1C160C]" data-icon="SignOut" data-size="20px" data-weight="regular">
             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">

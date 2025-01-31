@@ -107,5 +107,22 @@ RSpec.describe 'Jobs edit', type: :system, js: true do
       expect(page).to have_content(cover_letter_title)
       expect(page).to have_content('This is the content created by FactoryBot')
     end
+
+    it 'swich existing cover letters body when selected from dropdown' do
+      created_at = DateTime.now + 1.minute
+      job.cover_letters.create(body: 'This is the second cover letter body', created_at:)
+
+      visit jobs_path
+      click_on job.full_title
+
+      click_on 'Display Cover Letters'
+      old_cover_letter_title = job.cover_letters.first.title_with_datetime
+
+      expect(page).to have_content('This is the second cover letter body')
+
+      select old_cover_letter_title, from: 'job_cover_letters'
+
+      expect(page).to have_content('This is the content created by FactoryBot')
+    end
   end
 end

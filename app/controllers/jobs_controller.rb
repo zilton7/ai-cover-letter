@@ -7,7 +7,7 @@ class JobsController < ApplicationController
   # GET /jobs or /jobs.json
   def index
     @title = 'Your Jobs'
-    @pagy, @jobs = pagy(current_user.jobs)
+    @pagy, @jobs = pagy(current_user.jobs.order(created_at: :desc))
 
     respond_to do |format|
       format.html
