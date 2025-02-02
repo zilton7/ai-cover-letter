@@ -18,10 +18,8 @@ StripeEvent.configure do |events|
     invoice = event.data.object
     subscription = Subscription.find_by(stripe_subscription_id: invoice.subscription)
 
-    if subscription
-      # Update the subscription status to indicate payment failure
-      subscription.update(status: 'payment_failed')
-    end
+    # Update the subscription status to indicate payment failure
+    subscription&.update(status: 'payment_failed')
   }
 
   # Handle subscription cancellation
@@ -29,9 +27,7 @@ StripeEvent.configure do |events|
     subscription = event.data.object
     user_subscription = Subscription.find_by(stripe_subscription_id: subscription.id)
 
-    if user_subscription
-      # Update the subscription status to indicate cancellation
-      user_subscription.update(status: 'canceled')
-    end
+    # Update the subscription status to indicate cancellation
+    user_subscription&.update(status: 'canceled')
   }
 end
