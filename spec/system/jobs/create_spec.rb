@@ -62,6 +62,8 @@ RSpec.describe 'Jobs create', type: :system, js: true do
 
         visit new_job_path
 
+        expect(page).to have_content('Credits: 4')
+
         fill_in 'Job Title', with: valid_attributes[:title]
         fill_in 'Company Name', with: valid_attributes[:company]
         fill_in 'Location', with: valid_attributes[:location]
@@ -78,6 +80,7 @@ RSpec.describe 'Jobs create', type: :system, js: true do
 
         expect(page).to have_css('img.animate-pulse[src*="loading"][width="100"][height="100"]', wait: 5)
         expect(Job.count).to eq(1)
+        expect(page).to have_content('Credits: 3')
         expect(Job.last.resume.content).to be_present
         expect(Job.last.resume.content).to eq('This is the resume content from pdf file!')
       end
@@ -98,6 +101,7 @@ RSpec.describe 'Jobs create', type: :system, js: true do
         expect(page).to have_content("Company can't be blank")
         expect(page).to have_content("Location can't be blank")
         expect(page).to have_content("Description can't be blank")
+        expect(page).to have_content('Credits: 4')
         expect(Job.count).to eq(0)
       end
     end

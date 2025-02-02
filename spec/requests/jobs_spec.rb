@@ -41,9 +41,13 @@ RSpec.describe 'Jobs', type: :request do
 
     context 'with valid parameters' do
       it 'creates a new job' do
+        expect(@user.credits).to eq(4)
+
         expect do
           post jobs_path, params: valid_attributes, as: :turbo_stream
         end.to change(Job, :count).by(1)
+
+        expect(@user.credits).to eq(3)
       end
 
       it 'triggers the background job' do
@@ -72,6 +76,8 @@ RSpec.describe 'Jobs', type: :request do
         expect do
           post jobs_path, params: invalid_attributes, as: :turbo_stream
         end.not_to change(Job, :count)
+
+        expect(@user.credits).to eq(4)
       end
     end
 
