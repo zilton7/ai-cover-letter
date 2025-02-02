@@ -21,6 +21,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
+    @title = 'New Job'
     @job = Job.new
     @job.build_resume
   end

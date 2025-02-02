@@ -1,5 +1,5 @@
 default: &default
-  app_name: 'CoverLetterAI'
+  app_name: 'TheCoverLetterAI'
   support_email: 'support@nobsdating.site'
   name: 'NoBSDating'
   description: 'Get ahead the competition by finding affiliate products on Lauchzilla before they launch!'
