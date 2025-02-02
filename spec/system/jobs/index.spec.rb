@@ -49,5 +49,16 @@ RSpec.describe 'Jobs index', type: :system, js: true do
       expect(job.applied).to eq(true)
       expect(page).to have_selector('.line-through')
     end
+
+    it 'displays pagination' do
+      10.times do
+        Job.create!(valid_attributes.merge(user: @user))
+      end
+      visit jobs_path
+
+      expect(page).to have_css "a[href='/jobs?page=2']", text: 'Load More'
+      click_on 'Load More'
+      expect(page).to_not have_css 'a', text: 'Load More'
+    end
   end
 end
