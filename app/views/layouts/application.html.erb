@@ -24,8 +24,8 @@
     <%= turbo_stream_from 'credits' %>
     <%= turbo_stream_from 'cover-letters-count' %>
     <%= render "shared/flash" %>
+    <%= render 'shared/navbar' %>
     <main class="flex-grow">
-      <%= render 'shared/navbar' %>
       <%= yield %>
     </main>
     <%= render 'shared/footer' %>
