@@ -10,7 +10,7 @@ set :repo_url, 'https://github.com/zilton7/ai-cover-letter.git'
 set :git_http_username, 'zilton7'
 set :git_http_password, ENV['GITHUB_ACCESS_TOKEN']
 
-set :branch, 'development'
+set :branch, 'add/capistrano'
 
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"

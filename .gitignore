@@ -41,3 +41,5 @@ dump.rdb
 coverage/.last_run.json
 coverage/.resultset.json
 coverage/index.html
+
+/config/credentials/production.key
