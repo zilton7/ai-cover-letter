@@ -5,7 +5,7 @@ lock '~> 3.19.2'
 require 'dotenv'
 Dotenv.load
 
-set :application, 'the_cover_letter_ai'
+set :application, 'thecoverletterai'
 set :repo_url, 'https://github.com/zilton7/ai-cover-letter.git'
 set :git_http_username, 'zilton7'
 set :git_http_password, ENV['GITHUB_ACCESS_TOKEN']
@@ -18,6 +18,7 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 set :rails_env, 'production'
 set :rbenv_type, :user
 set :rbenv_ruby, '3.4.1'
+set :rbenv_custom_path, '/home/deploy/.rbenv'
 
 set :linked_files, fetch(:linked_files, [])
   .push('config/database.yml', 'config/credentials/production.yml.enc')
