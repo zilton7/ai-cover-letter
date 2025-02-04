@@ -17,7 +17,7 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 
 set :rails_env, 'production'
 set :rbenv_type, :user
-set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_ruby, '3.4.1' # Ensure this matches the Ruby version in your .ruby-version file
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 
