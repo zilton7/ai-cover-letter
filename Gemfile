@@ -74,6 +74,7 @@ group :development do
   gem 'webdrivers', '~> 5.0', require: false
 end
 
+gem 'capistrano-sidekiq', '~> 2.0'
 gem 'devise', '~> 4.9'
 gem 'omniauth-google-oauth2', '~> 1.2.0'
 gem 'omniauth-rails_csrf_protection'

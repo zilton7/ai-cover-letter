@@ -97,6 +97,12 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
+    capistrano-bundler (2.1.1)
+      capistrano (~> 3.1)
+    capistrano-sidekiq (2.3.1)
+      capistrano (>= 3.9.0)
+      capistrano-bundler
+      sidekiq (>= 6.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -522,6 +528,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   capistrano (~> 3.17)
+  capistrano-sidekiq (~> 2.0)
   capybara
   database_cleaner-active_record
   debug
