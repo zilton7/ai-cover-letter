@@ -70,11 +70,16 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'capistrano', '~> 3.17', require: false
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rails', '~> 1.4'
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano-rails-tail-log', '~> 0.1', require: false
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+  gem 'capistrano-sidekiq', '~> 2.0'
   gem 'web-console'
   gem 'webdrivers', '~> 5.0', require: false
 end
 
-gem 'capistrano-sidekiq', '~> 2.0'
 gem 'devise', '~> 4.9'
 gem 'omniauth-google-oauth2', '~> 1.2.0'
 gem 'omniauth-rails_csrf_protection'

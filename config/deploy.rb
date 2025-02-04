@@ -44,6 +44,7 @@ set :sidekiq_config_files, %w[sidekiq.yml]
 # set :sidekiq_config, -> { "#{current_path}/config/sidekiq.yml" }
 set :sidekiq_processes, 2
 set :sidekiq_config, 'config/sidekiq.yml' # Path to your Sidekiq config file
+after 'deploy:publishing', 'sidekiq:restart'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
