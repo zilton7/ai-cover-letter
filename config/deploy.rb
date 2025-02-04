@@ -21,7 +21,7 @@ set :rbenv_ruby, '3.4.1'
 set :rbenv_custom_path, '/home/deploy/.rbenv'
 
 set :linked_files, fetch(:linked_files, [])
-  .push('config/database.yml', 'config/credentials/production.yml.enc')
+  .push('config/database.yml', 'config/credentials/production.key')
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
        'vendor/bundle', '.bundle', 'public/system', 'public/uploads',
