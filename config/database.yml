@@ -82,7 +82,7 @@ production:
   primary: &primary_production
     <<: *default
     database: ai_cover_letter_production
-    username: ai_cover_letter
+    username: <%= ENV["AI_COVER_LETTER_DATABASE_USER"] %>
     password: <%= ENV["AI_COVER_LETTER_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
