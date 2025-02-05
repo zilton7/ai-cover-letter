@@ -75,7 +75,7 @@ group :development do
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-rails-tail-log', '~> 0.1', require: false
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-  gem 'capistrano-sidekiq', '~> 2.0'
+  gem 'capistrano-sidekiq', '~> 3.0'
   gem 'web-console'
   gem 'webdrivers', '~> 5.0', require: false
 end
