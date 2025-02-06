@@ -1,12 +1,15 @@
 <header id="navbar" class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#019863] px-10 py-3">
-  <%= link_to root_path, class: 'hover:scale-[0.975] hover:opacity-[0.65]' do %>
-    <div class="flex items-center gap-1 text-[#1C160C]">
-      <div class="size-6">
-        <%= image_tag asset_path('favicon/favicon.svg') %>
+  <div class='flex flex-col'>
+    <%= link_to root_path, class: 'hover:scale-[0.975] hover:opacity-[0.65] flex flex-col items-center' do %>
+      <div class="flex items-center gap-1 text-[#1C160C]">
+        <div class="size-6">
+          <%= image_tag asset_path('favicon/favicon.svg') %>
+        </div>
+        <h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]"><%= APP_INFO[:app_name]%></h2>
       </div>
-      <h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em]"><%= APP_INFO[:app_name]%></h2>
-    </div>
-  <% end %>
+      <p class='text-xs italic leading-tight opacity-50'><%= APP_INFO[:motto]%></p>
+    <% end %>
+  </div>
   <div class="flex flex-1 justify-end gap-8">
     <% if user_signed_in? %>
       <%= link_to subscriptions_path do %>
