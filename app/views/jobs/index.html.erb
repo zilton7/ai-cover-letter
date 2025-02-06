@@ -1,19 +1,25 @@
 <div class="flex flex-col justify-center items-center">
-  <div class="p-4 w-1/2 min-w-[500px]">
+  <div class="p-4 w-full md:w-1/2 min-w-[300px] sm:min-w-[500px]">
+    <!-- Button Section -->
     <div class="flex justify-stretch">
-      <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-end">
+      <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-center sm:justify-end">
         <%= link_to new_job_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
                        rounded-full h-10 px-4 bg-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal \
-                       tracking-[0.015em]" do %>
+                       tracking-[0.015em] hover:scale-[1.0125]" do %>
           <span class="truncate">Create New Job</span>
         <% end %>
       </div>
     </div>
+    <!-- Jobs List Section -->
     <div class="flex items-stretch justify-between gap-4 rounded-xl bg-[#FFFFFF] p-4">
       <div class="w-full border rounded-xl border-[#019863]">
+        <!-- Title -->
         <div class="flex flex-wrap justify-center gap-3 p-4">
-          <p class="text-[#1C160C] tracking-light text-[24px] font-bold"><%= @title || "Jobs" %></p>
+          <p class="text-[#1C160C] tracking-light text-[20px] sm:text-[24px] font-bold text-center">
+            <%= @title || "Jobs" %>
+          </p>
         </div>
+        <!-- Jobs List -->
         <div class="min-w-full">
           <% if @jobs.any? %>
             <%= turbo_frame_tag 'jobs' do %>
@@ -24,6 +30,7 @@
           <% else %>
             <p class="text-center my-10">No jobs found.</p>
           <% end %>
+          <!-- Load More Button -->
           <%= render 'shared/load_more_button', pagy_object: @pagy %>
         </div>
       </div>

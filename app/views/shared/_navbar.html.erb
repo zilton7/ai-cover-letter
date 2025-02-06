@@ -1,5 +1,7 @@
-<header id="navbar" class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#019863] px-10 py-3">
-  <div class='flex flex-col'>
+<header id="navbar" class="flex flex-row items-center justify-between whitespace-nowrap \
+                           order-b border-solid border-b-[#019863] px-4 md:px-10 py-3">
+  <!-- Logo and App Name -->
+  <div class='flex flex-col items-center md:items-start'>
     <%= link_to root_path, class: 'hover:scale-[0.975] hover:opacity-[0.65] flex flex-col items-center' do %>
       <div class="flex items-center gap-1 text-[#1C160C]">
         <div class="size-6">
@@ -10,7 +12,16 @@
       <p class='text-xs italic leading-tight opacity-50'><%= APP_INFO[:motto]%></p>
     <% end %>
   </div>
-  <div class="flex flex-1 justify-end gap-8">
+  <!-- Mobile Menu Toggle (Hamburger Icon) -->
+  <div class="md:hidden">
+    <button id="mobile-menu-toggle" class="text-[#1C160C] focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </div>
+  <!-- Navigation Links (Hidden on Mobile by Default) -->
+  <div id="mobile-menu" class="hidden md:flex flex-1 justify-end gap-8 flex-col md:flex-row items-center mt-4 md:mt-0">
     <% if user_signed_in? %>
       <%= link_to subscriptions_path do %>
         <div class="flex w-full justify-center">
@@ -23,7 +34,7 @@
       <% end %>
     <% end %>
     <% if current_user.present? %>
-      <div class="flex items-center gap-9">
+      <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-9">
         <%= link_to new_job_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden \
                        rounded-full h-10 px-4 border border-[#F4EFE6] text-[#1C160C] text-sm font-bold leading-normal \
                        tracking-[0.015em] hover:border-[#019863af] hover:scale-[0.95]" do %>
@@ -68,3 +79,10 @@
     <% end %>
   </div>
 </header>
+<!-- JavaScript to Toggle Mobile Menu -->
+<script>
+  document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>

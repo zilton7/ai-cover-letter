@@ -1,18 +1,19 @@
-<div class="p-4 flex justify-center min-h-screen">
-  <div class="flex min-w-[40vw] max-w-1/2 items-stretch justify-between gap-4 h-[50vh] mt-10
-              rounded-xl bg-[#FFFFFF] p-4 shadow border border-[#019863]">
-    <div class="flex flex-col gap-4 w-full">
-      <div class="p-4 flex flex-col items-center justify-center gap-3">
+<div class="p-4 flex justify-center">
+  <div class="flex flex-col w-full md:max-w-[40vw] items-stretch gap-4 mt-10 rounded-xl \
+            bg-[#FFFFFF] p-4 shadow border border-[#019863] mx-auto">
+    <div class="flex flex-col flex-grow gap-4 w-full pb-3">
+      <!-- User Info Section -->
+      <div class="p-4 flex flex-col items-center justify-center gap-3 text-center">
         <p class='text-xl'>👋 Hey, <%= current_user.email %>!</p>
         <% if current_user.subscribed? %>
-          <div class="flex flex-row gap-2">
-            <p class="text-lg">You currently subscribed to
+          <div class="flex flex-col sm:flex-row gap-2 items-center">
+            <p class="text-lg">You are currently subscribed to the
               <span class="font-bold text-[#019863af]"><%= current_user.subscription.plan_name %></span> plan!
             </p>
-            <%= button_to 'cancel', 
+            <%= button_to 'Cancel', 
                 cancel_subscription_checkout_index_path, 
                 method: :delete,
-                class: 'text-red-500 border border-red-500 px-1 rounded-full text-sm',
+                class: 'text-red-500 border border-red-500 px-2 py-1 rounded-full text-sm',
                 form_class: 'inline-form',
                 data: { turbo_confirm: 'Are you sure you want to cancel your subscription?' } %>
           </div>
@@ -21,20 +22,23 @@
         <% end %>
         <% if current_user.subscription.present? %>
           <p class="text-lg">Status: 
-            <span class="font-bold <%= current_user&.subscribed? ? 'text-[#019863af]' : 'text-red-300' %>"><%= current_user&.subscription.status_name %></span>
+            <span class="font-bold <%= current_user&.subscribed? ? 'text-[#019863af]' : 'text-red-300' %>">
+              <%= current_user&.subscription.status_name %>
+            </span>
           </p>
         <% end %>
       </div>
-      <div class="flex flex-row justify-center gap-5">
+      <!-- Subscription Plans Section -->
+      <div class="flex flex-col sm:flex-row justify-center gap-5">
         <% STRIPE_PLANS.each do |key, plan| %>
           <div class="p-6 border rounded-lg hover:scale-[1.025] flex flex-col \
-                      justify-center items-center min-h-1/2 <%= plan[:most_popular] ? 'bg-gray-200 border-[#019863]' : '' %>">
+                      justify-center items-center w-full sm:w-auto <%= plan[:most_popular] ? 'bg-gray-200 border-[#019863]' : '' %>">
             <p class="text-gray-600 text-3xl font-bold">$<%= plan[:price] / 100.0 %></p>
             <p>Per Month</p>
-            <h3 class="mt-2"><%= plan[:name] %></h3>
-            <h3 class="font-semibold mt-2"><%= plan[:description] %></h3>
+            <h3 class="mt-2 text-center"><%= plan[:name] %></h3>
+            <h3 class="font-semibold mt-2 text-center"><%= plan[:description] %></h3>
             <%= button_to "Subscribe", checkout_index_path(plan: key), id: key,
-                class: "mt-4 px-4 py-2 bg-[#019863] text-white rounded hover:scale-[1.025]",
+                class: "mt-4 px-4 py-2 bg-[#019863] text-white rounded hover:scale-[1.025] w-full sm:w-auto",
                 data: { turbo: false } %>
           </div>
         <% end %>

@@ -1,12 +1,12 @@
 <%= turbo_frame_tag 'jobs-form' do %>
   <div class="flex flex-1 justify-center py-5">
-    <div class="layout-content-container flex flex-col max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center">
+    <div class="layout-content-container flex flex-col w-full sm:max-w-[40vw] flex-1 border border-[#019863] rounded-xl shadow justify-center mx-4 sm:mx-0">
       <div class="flex flex-wrap justify-center gap-3 p-4 mt-5">
         <% editing_mode = controller.action_name.in?(['edit', 'update']) ? true : false  %>
         <% if editing_mode %>
           <p class="text-[#1C160C] tracking-light text-[28px] font-bold leading-tight">Editing</p>
         <% else %>
-          <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight min-w-72">
+          <p class="text-[#1C160C] tracking-light text-[22px] font-bold leading-tight text-center">
             <span id='cover-letters-count'><%= CoverLetterCount&.count || 0 %></span> Cover Letters Generated! 🎉
           </p>
         <% end %>
@@ -19,32 +19,32 @@
                                                                 leading-normal",
                                                           readonly: editing_mode,
                                                           placeholder: 'Job Title' },
-                                              wrapper_html: { class: "my-5 mx-5" } %>
-          <div class="my-5">
+                                              wrapper_html: { class: "my-3 sm:my-5 mx-3 sm:mx-5" } %>
+          <div class="my-3 sm:my-5">
             <%= f.input :company, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                     text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                     focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                     leading-normal",
                                                              readonly: editing_mode,
                                                              placeholder: 'Company Name' },
-                                              wrapper_html: { class: "my-5 mx-5" } %>
+                                              wrapper_html: { class: "my-3 sm:my-5 mx-3 sm:mx-5" } %>
           </div>
-          <div class="my-5">
+          <div class="my-3 sm:my-5">
             <%= f.input :location, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl \
                                                                      text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                      focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                      leading-normal",
                                                              readonly: editing_mode,
                                                              placeholder: 'Location' },
-                                               wrapper_html: { class: "my-5 mx-5" } %>
+                                               wrapper_html: { class: "my-3 sm:my-5 mx-3 sm:mx-5" } %>
           </div>
-          <div class="my-5">
+          <div class="my-3 sm:my-5">
             <%= f.input :description, as: :text, label: false, input_html: { class: "form-input flex w-full min-w-0 flex-1 overflow-hidden rounded-xl \
                                                                         text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] \
                                                                         focus:border-[#019863] placeholder:text-[#A18249] p-[15px] text-base font-normal \
                                                                         leading-normal",
                                                               placeholder: 'Job Description', rows: 4},
-                                                wrapper_html: { class: "my-5 mx-5" } %>
+                                                wrapper_html: { class: "my-3 sm:my-5 mx-3 sm:mx-5" } %>
           </div>
           <%= f.fields_for :resume do |r|%>
             <div class="flex px-4 py-3 justify-center" data-controller='file-upload'>
