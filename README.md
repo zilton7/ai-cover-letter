@@ -1,4 +1,5 @@
 # README
+[CHECK LVIE VERSION](https://thecoverletterai.com)
 
 ![alt app_screenshot](screenshot.png)
 
