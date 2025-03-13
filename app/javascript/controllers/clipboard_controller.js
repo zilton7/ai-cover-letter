@@ -12,6 +12,10 @@ export default class extends Controller {
       .replace(/<!-- .*?-->/gs, "")
       .replace(/<turbo-frame id=".*?">(.*?)<\/turbo-frame>/gs, "$1")
       .replace(/<br\s*\/?>/gi, "\n")
+      .replace(
+        /<div data-clipboard-target="source" data-cover-letter-target="content">(.*?)<\/div>/gs,
+        "$1"
+      )
       .trim();
     // copy the content from the sourceTarget to the clipboard
     navigator.clipboard.writeText(textToCopy);
