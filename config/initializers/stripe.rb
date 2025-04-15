@@ -3,14 +3,14 @@ StripeEvent.signing_secret = Rails.application.credentials.dig(:stripe, :signing
 
 STRIPE_PLANS = {
   premium: {
-    id: 'price_1Qlv4yCrHIUGY6dGoN7pPEF9', # Replace with your Stripe Price ID
+    id: 'price_1RE8M7CrHIUGY6dG80EdLS7h', # Replace with your Stripe Price ID
     name: 'Unlimited',
     description: 'Using Groq AI 🚀',
     price: 277,
     most_popular: false
   },
   turbo_premium: {
-    id: 'price_1Qlv6jCrHIUGY6dGpikCCVw8', # Replace with your Stripe Price ID
+    id: 'price_1RE8KvCrHIUGY6dGzwCcfvyP', # Replace with your Stripe Price ID
     name: 'Turbo Unlimited',
     description: 'Using GPT-4 🤖',
     price: 577,
